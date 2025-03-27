@@ -15,6 +15,7 @@ CREATE TABLE info (
     ID_info INT PRIMARY KEY NOT NULL,
     ID_FK_usuario INT NOT NULL,
     salt VARCHAR NOT NULL,
+    cartera DOUBLE NOT NULL,
     FOREIGN KEY (ID_FK_usuario) REFERENCES usuarios(ID_usuario) ON DELETE CASCADE
 );
 
