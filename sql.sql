@@ -22,6 +22,7 @@ CREATE TABLE info (
 CREATE TABLE biblioteca (
     ID_biblioteca INT PRIMARY KEY NOT NULL,
     ID_FK_usuario INT NOT NULL,
+    cantidad_libros INT NOT NULL,
     FOREIGN KEY (ID_FK_usuario) REFERENCES usuarios(ID_usuario) ON DELETE CASCADE
 );
 
