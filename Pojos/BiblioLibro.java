@@ -22,8 +22,8 @@ import javax.persistence.TemporalType;
 @Table(name = "biblio_libro")
 @NamedQueries({
     @NamedQuery(name = "BiblioLibro.findAll", query = "SELECT b FROM BiblioLibro b"),
-    @NamedQuery(name = "BiblioLibro.findByIDFKbiblioteca", query = "SELECT b FROM BiblioLibro b WHERE b.biblioLibroPK.iDFKbiblioteca = :iDFKbiblioteca"),
-    @NamedQuery(name = "BiblioLibro.findByIDFKlibro", query = "SELECT b FROM BiblioLibro b WHERE b.biblioLibroPK.iDFKlibro = :iDFKlibro"),
+    @NamedQuery(name = "BiblioLibro.findByIdFkBiblioteca", query = "SELECT b FROM BiblioLibro b WHERE b.biblioLibroPK.idFkBiblioteca = :idFkBiblioteca"),
+    @NamedQuery(name = "BiblioLibro.findByIdFkLibro", query = "SELECT b FROM BiblioLibro b WHERE b.biblioLibroPK.idFkLibro = :idFkLibro"),
     @NamedQuery(name = "BiblioLibro.findByFechaCompra", query = "SELECT b FROM BiblioLibro b WHERE b.fechaCompra = :fechaCompra")})
 public class BiblioLibro implements Serializable {
 
@@ -34,10 +34,10 @@ public class BiblioLibro implements Serializable {
     @Column(name = "fecha_compra")
     @Temporal(TemporalType.DATE)
     private Date fechaCompra;
-    @JoinColumn(name = "ID_FK_biblioteca", referencedColumnName = "ID_biblioteca", insertable = false, updatable = false)
+    @JoinColumn(name = "id_fk_biblioteca", referencedColumnName = "id_biblioteca", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Biblioteca biblioteca;
-    @JoinColumn(name = "ID_FK_libro", referencedColumnName = "ID_libro", insertable = false, updatable = false)
+    @JoinColumn(name = "id_fk_libro", referencedColumnName = "id_libro", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Libro libro;
 
@@ -53,8 +53,8 @@ public class BiblioLibro implements Serializable {
         this.fechaCompra = fechaCompra;
     }
 
-    public BiblioLibro(int iDFKbiblioteca, int iDFKlibro) {
-        this.biblioLibroPK = new BiblioLibroPK(iDFKbiblioteca, iDFKlibro);
+    public BiblioLibro(int idFkBiblioteca, int idFkLibro) {
+        this.biblioLibroPK = new BiblioLibroPK(idFkBiblioteca, idFkLibro);
     }
 
     public BiblioLibroPK getBiblioLibroPK() {

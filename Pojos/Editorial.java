@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "editorial")
 @NamedQueries({
     @NamedQuery(name = "Editorial.findAll", query = "SELECT e FROM Editorial e"),
-    @NamedQuery(name = "Editorial.findByIDeditorial", query = "SELECT e FROM Editorial e WHERE e.iDeditorial = :iDeditorial"),
+    @NamedQuery(name = "Editorial.findByIdEditorial", query = "SELECT e FROM Editorial e WHERE e.idEditorial = :idEditorial"),
     @NamedQuery(name = "Editorial.findByNombre", query = "SELECT e FROM Editorial e WHERE e.nombre = :nombre"),
     @NamedQuery(name = "Editorial.findByNif", query = "SELECT e FROM Editorial e WHERE e.nif = :nif"),
     @NamedQuery(name = "Editorial.findByDireccion", query = "SELECT e FROM Editorial e WHERE e.direccion = :direccion"),
@@ -33,13 +33,13 @@ public class Editorial implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID_editorial")
-    private Integer iDeditorial;
+    @Column(name = "id_editorial")
+    private Integer idEditorial;
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @Column(name = "NIF")
+    @Column(name = "nif")
     private String nif;
     @Basic(optional = false)
     @Column(name = "direccion")
@@ -49,7 +49,7 @@ public class Editorial implements Serializable {
     private String correo;
     @Basic(optional = false)
     @Column(name = "telefono")
-    private String telefono;
+    private int telefono;
     @Column(name = "contacto")
     private String contacto;
     @Column(name = "web")
@@ -60,12 +60,12 @@ public class Editorial implements Serializable {
     public Editorial() {
     }
 
-    public Editorial(Integer iDeditorial) {
-        this.iDeditorial = iDeditorial;
+    public Editorial(Integer idEditorial) {
+        this.idEditorial = idEditorial;
     }
 
-    public Editorial(Integer iDeditorial, String nombre, String nif, String direccion, String correo, String telefono) {
-        this.iDeditorial = iDeditorial;
+    public Editorial(Integer idEditorial, String nombre, String nif, String direccion, String correo, int telefono) {
+        this.idEditorial = idEditorial;
         this.nombre = nombre;
         this.nif = nif;
         this.direccion = direccion;
@@ -73,12 +73,12 @@ public class Editorial implements Serializable {
         this.telefono = telefono;
     }
 
-    public Integer getIDeditorial() {
-        return iDeditorial;
+    public Integer getIdEditorial() {
+        return idEditorial;
     }
 
-    public void setIDeditorial(Integer iDeditorial) {
-        this.iDeditorial = iDeditorial;
+    public void setIdEditorial(Integer idEditorial) {
+        this.idEditorial = idEditorial;
     }
 
     public String getNombre() {
@@ -113,11 +113,11 @@ public class Editorial implements Serializable {
         this.correo = correo;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
@@ -148,7 +148,7 @@ public class Editorial implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iDeditorial != null ? iDeditorial.hashCode() : 0);
+        hash += (idEditorial != null ? idEditorial.hashCode() : 0);
         return hash;
     }
 
@@ -159,7 +159,7 @@ public class Editorial implements Serializable {
             return false;
         }
         Editorial other = (Editorial) object;
-        if ((this.iDeditorial == null && other.iDeditorial != null) || (this.iDeditorial != null && !this.iDeditorial.equals(other.iDeditorial))) {
+        if ((this.idEditorial == null && other.idEditorial != null) || (this.idEditorial != null && !this.idEditorial.equals(other.idEditorial))) {
             return false;
         }
         return true;
@@ -167,7 +167,7 @@ public class Editorial implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.Editorial[ iDeditorial=" + iDeditorial + " ]";
+        return "com.mycompany.proyecto.Pojos.Editorial[ idEditorial=" + idEditorial + " ]";
     }
 
 }

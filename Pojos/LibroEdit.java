@@ -22,8 +22,8 @@ import javax.persistence.TemporalType;
 @Table(name = "libro_edit")
 @NamedQueries({
     @NamedQuery(name = "LibroEdit.findAll", query = "SELECT l FROM LibroEdit l"),
-    @NamedQuery(name = "LibroEdit.findByIDFKeditorial", query = "SELECT l FROM LibroEdit l WHERE l.libroEditPK.iDFKeditorial = :iDFKeditorial"),
-    @NamedQuery(name = "LibroEdit.findByIDFKlibro", query = "SELECT l FROM LibroEdit l WHERE l.libroEditPK.iDFKlibro = :iDFKlibro"),
+    @NamedQuery(name = "LibroEdit.findByIdFkEditorial", query = "SELECT l FROM LibroEdit l WHERE l.libroEditPK.idFkEditorial = :idFkEditorial"),
+    @NamedQuery(name = "LibroEdit.findByIdFkLibro", query = "SELECT l FROM LibroEdit l WHERE l.libroEditPK.idFkLibro = :idFkLibro"),
     @NamedQuery(name = "LibroEdit.findByFechaAlta", query = "SELECT l FROM LibroEdit l WHERE l.fechaAlta = :fechaAlta")})
 public class LibroEdit implements Serializable {
 
@@ -34,10 +34,10 @@ public class LibroEdit implements Serializable {
     @Column(name = "fecha_alta")
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
-    @JoinColumn(name = "ID_FK_editorial", referencedColumnName = "ID_editorial", insertable = false, updatable = false)
+    @JoinColumn(name = "id_fk_editorial", referencedColumnName = "id_editorial", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Editorial editorial;
-    @JoinColumn(name = "ID_FK_libro", referencedColumnName = "ID_libro", insertable = false, updatable = false)
+    @JoinColumn(name = "id_fk_libro", referencedColumnName = "id_libro", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Libro libro;
 
@@ -53,8 +53,8 @@ public class LibroEdit implements Serializable {
         this.fechaAlta = fechaAlta;
     }
 
-    public LibroEdit(int iDFKeditorial, int iDFKlibro) {
-        this.libroEditPK = new LibroEditPK(iDFKeditorial, iDFKlibro);
+    public LibroEdit(int idFkEditorial, int idFkLibro) {
+        this.libroEditPK = new LibroEditPK(idFkEditorial, idFkLibro);
     }
 
     public LibroEditPK getLibroEditPK() {

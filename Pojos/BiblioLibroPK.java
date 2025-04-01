@@ -13,41 +13,41 @@ import javax.persistence.Embeddable;
 public class BiblioLibroPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "ID_FK_biblioteca")
-    private int iDFKbiblioteca;
+    @Column(name = "id_fk_biblioteca")
+    private int idFkBiblioteca;
     @Basic(optional = false)
-    @Column(name = "ID_FK_libro")
-    private int iDFKlibro;
+    @Column(name = "id_fk_libro")
+    private int idFkLibro;
 
     public BiblioLibroPK() {
     }
 
-    public BiblioLibroPK(int iDFKbiblioteca, int iDFKlibro) {
-        this.iDFKbiblioteca = iDFKbiblioteca;
-        this.iDFKlibro = iDFKlibro;
+    public BiblioLibroPK(int idFkBiblioteca, int idFkLibro) {
+        this.idFkBiblioteca = idFkBiblioteca;
+        this.idFkLibro = idFkLibro;
     }
 
-    public int getIDFKbiblioteca() {
-        return iDFKbiblioteca;
+    public int getIdFkBiblioteca() {
+        return idFkBiblioteca;
     }
 
-    public void setIDFKbiblioteca(int iDFKbiblioteca) {
-        this.iDFKbiblioteca = iDFKbiblioteca;
+    public void setIdFkBiblioteca(int idFkBiblioteca) {
+        this.idFkBiblioteca = idFkBiblioteca;
     }
 
-    public int getIDFKlibro() {
-        return iDFKlibro;
+    public int getIdFkLibro() {
+        return idFkLibro;
     }
 
-    public void setIDFKlibro(int iDFKlibro) {
-        this.iDFKlibro = iDFKlibro;
+    public void setIdFkLibro(int idFkLibro) {
+        this.idFkLibro = idFkLibro;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) iDFKbiblioteca;
-        hash += (int) iDFKlibro;
+        hash += (int) idFkBiblioteca;
+        hash += (int) idFkLibro;
         return hash;
     }
 
@@ -58,10 +58,10 @@ public class BiblioLibroPK implements Serializable {
             return false;
         }
         BiblioLibroPK other = (BiblioLibroPK) object;
-        if (this.iDFKbiblioteca != other.iDFKbiblioteca) {
+        if (this.idFkBiblioteca != other.idFkBiblioteca) {
             return false;
         }
-        if (this.iDFKlibro != other.iDFKlibro) {
+        if (this.idFkLibro != other.idFkLibro) {
             return false;
         }
         return true;
@@ -69,7 +69,7 @@ public class BiblioLibroPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.BiblioLibroPK[ iDFKbiblioteca=" + iDFKbiblioteca + ", iDFKlibro=" + iDFKlibro + " ]";
+        return "com.mycompany.proyecto.Pojos.BiblioLibroPK[ idFkBiblioteca=" + idFkBiblioteca + ", idFkLibro=" + idFkLibro + " ]";
     }
 
 }

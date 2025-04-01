@@ -22,33 +22,50 @@ import javax.persistence.Table;
 @Table(name = "biblioteca")
 @NamedQueries({
     @NamedQuery(name = "Biblioteca.findAll", query = "SELECT b FROM Biblioteca b"),
-    @NamedQuery(name = "Biblioteca.findByIDbiblioteca", query = "SELECT b FROM Biblioteca b WHERE b.iDbiblioteca = :iDbiblioteca")})
+    @NamedQuery(name = "Biblioteca.findByIdBiblioteca", query = "SELECT b FROM Biblioteca b WHERE b.idBiblioteca = :idBiblioteca"),
+    @NamedQuery(name = "Biblioteca.findByCantidadLibros", query = "SELECT b FROM Biblioteca b WHERE b.cantidadLibros = :cantidadLibros")})
 public class Biblioteca implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID_biblioteca")
-    private Integer iDbiblioteca;
+    @Column(name = "id_biblioteca")
+    private Integer idBiblioteca;
+    @Basic(optional = false)
+    @Column(name = "cantidad_libros")
+    private int cantidadLibros;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "biblioteca")
     private Collection<BiblioLibro> biblioLibroCollection;
-    @JoinColumn(name = "ID_FK_usuario", referencedColumnName = "ID_usuario")
+    @JoinColumn(name = "id_fk_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
-    private Usuarios iDFKusuario;
+    private Usuarios idFkUsuario;
 
     public Biblioteca() {
     }
 
-    public Biblioteca(Integer iDbiblioteca) {
-        this.iDbiblioteca = iDbiblioteca;
+    public Biblioteca(Integer idBiblioteca) {
+        this.idBiblioteca = idBiblioteca;
     }
 
-    public Integer getIDbiblioteca() {
-        return iDbiblioteca;
+    public Biblioteca(Integer idBiblioteca, int cantidadLibros) {
+        this.idBiblioteca = idBiblioteca;
+        this.cantidadLibros = cantidadLibros;
     }
 
-    public void setIDbiblioteca(Integer iDbiblioteca) {
-        this.iDbiblioteca = iDbiblioteca;
+    public Integer getIdBiblioteca() {
+        return idBiblioteca;
+    }
+
+    public void setIdBiblioteca(Integer idBiblioteca) {
+        this.idBiblioteca = idBiblioteca;
+    }
+
+    public int getCantidadLibros() {
+        return cantidadLibros;
+    }
+
+    public void setCantidadLibros(int cantidadLibros) {
+        this.cantidadLibros = cantidadLibros;
     }
 
     public Collection<BiblioLibro> getBiblioLibroCollection() {
@@ -59,18 +76,18 @@ public class Biblioteca implements Serializable {
         this.biblioLibroCollection = biblioLibroCollection;
     }
 
-    public Usuarios getIDFKusuario() {
-        return iDFKusuario;
+    public Usuarios getIdFkUsuario() {
+        return idFkUsuario;
     }
 
-    public void setIDFKusuario(Usuarios iDFKusuario) {
-        this.iDFKusuario = iDFKusuario;
+    public void setIdFkUsuario(Usuarios idFkUsuario) {
+        this.idFkUsuario = idFkUsuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iDbiblioteca != null ? iDbiblioteca.hashCode() : 0);
+        hash += (idBiblioteca != null ? idBiblioteca.hashCode() : 0);
         return hash;
     }
 
@@ -81,7 +98,7 @@ public class Biblioteca implements Serializable {
             return false;
         }
         Biblioteca other = (Biblioteca) object;
-        if ((this.iDbiblioteca == null && other.iDbiblioteca != null) || (this.iDbiblioteca != null && !this.iDbiblioteca.equals(other.iDbiblioteca))) {
+        if ((this.idBiblioteca == null && other.idBiblioteca != null) || (this.idBiblioteca != null && !this.idBiblioteca.equals(other.idBiblioteca))) {
             return false;
         }
         return true;
@@ -89,7 +106,7 @@ public class Biblioteca implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.Biblioteca[ iDbiblioteca=" + iDbiblioteca + " ]";
+        return "com.mycompany.proyecto.Pojos.Biblioteca[ idBiblioteca=" + idBiblioteca + " ]";
     }
 
 }

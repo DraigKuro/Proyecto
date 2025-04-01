@@ -1,7 +1,6 @@
 package com.mycompany.proyecto.Pojos;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -9,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,30 +23,33 @@ import javax.persistence.TemporalType;
 @Table(name = "libro")
 @NamedQueries({
     @NamedQuery(name = "Libro.findAll", query = "SELECT l FROM Libro l"),
-    @NamedQuery(name = "Libro.findByIDlibro", query = "SELECT l FROM Libro l WHERE l.iDlibro = :iDlibro"),
+    @NamedQuery(name = "Libro.findByIdLibro", query = "SELECT l FROM Libro l WHERE l.idLibro = :idLibro"),
     @NamedQuery(name = "Libro.findByTitulo", query = "SELECT l FROM Libro l WHERE l.titulo = :titulo"),
+    @NamedQuery(name = "Libro.findByIdioma", query = "SELECT l FROM Libro l WHERE l.idioma = :idioma"),
+    @NamedQuery(name = "Libro.findByGenero", query = "SELECT l FROM Libro l WHERE l.genero = :genero"),
     @NamedQuery(name = "Libro.findByFechaPubli", query = "SELECT l FROM Libro l WHERE l.fechaPubli = :fechaPubli"),
+    @NamedQuery(name = "Libro.findByAutores", query = "SELECT l FROM Libro l WHERE l.autores = :autores"),
     @NamedQuery(name = "Libro.findByPrecio", query = "SELECT l FROM Libro l WHERE l.precio = :precio"),
     @NamedQuery(name = "Libro.findByDrm", query = "SELECT l FROM Libro l WHERE l.drm = :drm"),
-    @NamedQuery(name = "Libro.findByNpaginas", query = "SELECT l FROM Libro l WHERE l.npaginas = :npaginas"),
-    @NamedQuery(name = "Libro.findByURLibro", query = "SELECT l FROM Libro l WHERE l.uRLibro = :uRLibro"),
-    @NamedQuery(name = "Libro.findByURLportada", query = "SELECT l FROM Libro l WHERE l.uRLportada = :uRLportada")})
+    @NamedQuery(name = "Libro.findByNPaginas", query = "SELECT l FROM Libro l WHERE l.nPaginas = :nPaginas"),
+    @NamedQuery(name = "Libro.findBySinopsis", query = "SELECT l FROM Libro l WHERE l.sinopsis = :sinopsis"),
+    @NamedQuery(name = "Libro.findByValoracion", query = "SELECT l FROM Libro l WHERE l.valoracion = :valoracion"),
+    @NamedQuery(name = "Libro.findByUrllibro", query = "SELECT l FROM Libro l WHERE l.urllibro = :urllibro"),
+    @NamedQuery(name = "Libro.findByUrlportada", query = "SELECT l FROM Libro l WHERE l.urlportada = :urlportada")})
 public class Libro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID_libro")
-    private Integer iDlibro;
+    @Column(name = "id_libro")
+    private Integer idLibro;
     @Basic(optional = false)
     @Column(name = "titulo")
     private String titulo;
     @Basic(optional = false)
-    @Lob
     @Column(name = "idioma")
     private String idioma;
     @Basic(optional = false)
-    @Lob
     @Column(name = "genero")
     private String genero;
     @Basic(optional = false)
@@ -56,33 +57,29 @@ public class Libro implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaPubli;
     @Basic(optional = false)
-    @Lob
     @Column(name = "autores")
     private String autores;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "precio")
-    private BigDecimal precio;
+    private double precio;
     @Basic(optional = false)
-    @Column(name = "DRM")
-    private Boolean drm;
+    @Column(name = "drm")
+    private boolean drm;
     @Basic(optional = false)
-    @Column(name = "N_paginas")
-    private int npaginas;
+    @Column(name = "n_paginas")
+    private int nPaginas;
     @Basic(optional = false)
-    @Lob
     @Column(name = "sinopsis")
     private String sinopsis;
     @Basic(optional = false)
-    @Lob
     @Column(name = "valoracion")
     private String valoracion;
     @Basic(optional = false)
-    @Column(name = "URLibro")
-    private String uRLibro;
+    @Column(name = "urllibro")
+    private String urllibro;
     @Basic(optional = false)
-    @Column(name = "URLportada")
-    private String uRLportada;
+    @Column(name = "urlportada")
+    private String urlportada;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
     private Collection<BiblioLibro> biblioLibroCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
@@ -91,12 +88,12 @@ public class Libro implements Serializable {
     public Libro() {
     }
 
-    public Libro(Integer iDlibro) {
-        this.iDlibro = iDlibro;
+    public Libro(Integer idLibro) {
+        this.idLibro = idLibro;
     }
 
-    public Libro(Integer iDlibro, String titulo, String idioma, String genero, Date fechaPubli, String autores, BigDecimal precio, Boolean drm, int npaginas, String sinopsis, String valoracion, String uRLibro, String uRLportada) {
-        this.iDlibro = iDlibro;
+    public Libro(Integer idLibro, String titulo, String idioma, String genero, Date fechaPubli, String autores, double precio, boolean drm, int nPaginas, String sinopsis, String valoracion, String urllibro, String urlportada) {
+        this.idLibro = idLibro;
         this.titulo = titulo;
         this.idioma = idioma;
         this.genero = genero;
@@ -104,19 +101,19 @@ public class Libro implements Serializable {
         this.autores = autores;
         this.precio = precio;
         this.drm = drm;
-        this.npaginas = npaginas;
+        this.nPaginas = nPaginas;
         this.sinopsis = sinopsis;
         this.valoracion = valoracion;
-        this.uRLibro = uRLibro;
-        this.uRLportada = uRLportada;
+        this.urllibro = urllibro;
+        this.urlportada = urlportada;
     }
 
-    public Integer getIDlibro() {
-        return iDlibro;
+    public Integer getIdLibro() {
+        return idLibro;
     }
 
-    public void setIDlibro(Integer iDlibro) {
-        this.iDlibro = iDlibro;
+    public void setIdLibro(Integer idLibro) {
+        this.idLibro = idLibro;
     }
 
     public String getTitulo() {
@@ -159,28 +156,28 @@ public class Libro implements Serializable {
         this.autores = autores;
     }
 
-    public BigDecimal getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(BigDecimal precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
-    public Boolean getDrm() {
+    public boolean getDrm() {
         return drm;
     }
 
-    public void setDrm(Boolean drm) {
+    public void setDrm(boolean drm) {
         this.drm = drm;
     }
 
-    public int getNpaginas() {
-        return npaginas;
+    public int getNPaginas() {
+        return nPaginas;
     }
 
-    public void setNpaginas(int npaginas) {
-        this.npaginas = npaginas;
+    public void setNPaginas(int nPaginas) {
+        this.nPaginas = nPaginas;
     }
 
     public String getSinopsis() {
@@ -199,20 +196,20 @@ public class Libro implements Serializable {
         this.valoracion = valoracion;
     }
 
-    public String getURLibro() {
-        return uRLibro;
+    public String getUrllibro() {
+        return urllibro;
     }
 
-    public void setURLibro(String uRLibro) {
-        this.uRLibro = uRLibro;
+    public void setUrllibro(String urllibro) {
+        this.urllibro = urllibro;
     }
 
-    public String getURLportada() {
-        return uRLportada;
+    public String getUrlportada() {
+        return urlportada;
     }
 
-    public void setURLportada(String uRLportada) {
-        this.uRLportada = uRLportada;
+    public void setUrlportada(String urlportada) {
+        this.urlportada = urlportada;
     }
 
     public Collection<BiblioLibro> getBiblioLibroCollection() {
@@ -234,7 +231,7 @@ public class Libro implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iDlibro != null ? iDlibro.hashCode() : 0);
+        hash += (idLibro != null ? idLibro.hashCode() : 0);
         return hash;
     }
 
@@ -245,7 +242,7 @@ public class Libro implements Serializable {
             return false;
         }
         Libro other = (Libro) object;
-        if ((this.iDlibro == null && other.iDlibro != null) || (this.iDlibro != null && !this.iDlibro.equals(other.iDlibro))) {
+        if ((this.idLibro == null && other.idLibro != null) || (this.idLibro != null && !this.idLibro.equals(other.idLibro))) {
             return false;
         }
         return true;
@@ -253,7 +250,7 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.Libro[ iDlibro=" + iDlibro + " ]";
+        return "com.mycompany.proyecto.Pojos.Libro[ idLibro=" + idLibro + " ]";
     }
 
 }

@@ -19,40 +19,45 @@ import javax.persistence.Table;
 @Table(name = "info")
 @NamedQueries({
     @NamedQuery(name = "Info.findAll", query = "SELECT i FROM Info i"),
-    @NamedQuery(name = "Info.findByIDinfo", query = "SELECT i FROM Info i WHERE i.iDinfo = :iDinfo"),
-    @NamedQuery(name = "Info.findBySalt", query = "SELECT i FROM Info i WHERE i.salt = :salt")})
+    @NamedQuery(name = "Info.findByIdInfo", query = "SELECT i FROM Info i WHERE i.idInfo = :idInfo"),
+    @NamedQuery(name = "Info.findBySalt", query = "SELECT i FROM Info i WHERE i.salt = :salt"),
+    @NamedQuery(name = "Info.findByCartera", query = "SELECT i FROM Info i WHERE i.cartera = :cartera")})
 public class Info implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID_info")
-    private Integer iDinfo;
+    @Column(name = "id_info")
+    private Integer idInfo;
     @Basic(optional = false)
     @Column(name = "salt")
     private String salt;
-    @JoinColumn(name = "ID_FK_usuario", referencedColumnName = "ID_usuario")
+    @Basic(optional = false)
+    @Column(name = "cartera")
+    private double cartera;
+    @JoinColumn(name = "id_fk_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
-    private Usuarios iDFKusuario;
+    private Usuarios idFkUsuario;
 
     public Info() {
     }
 
-    public Info(Integer iDinfo) {
-        this.iDinfo = iDinfo;
+    public Info(Integer idInfo) {
+        this.idInfo = idInfo;
     }
 
-    public Info(Integer iDinfo, String salt) {
-        this.iDinfo = iDinfo;
+    public Info(Integer idInfo, String salt, double cartera) {
+        this.idInfo = idInfo;
         this.salt = salt;
+        this.cartera = cartera;
     }
 
-    public Integer getIDinfo() {
-        return iDinfo;
+    public Integer getIdInfo() {
+        return idInfo;
     }
 
-    public void setIDinfo(Integer iDinfo) {
-        this.iDinfo = iDinfo;
+    public void setIdInfo(Integer idInfo) {
+        this.idInfo = idInfo;
     }
 
     public String getSalt() {
@@ -63,18 +68,26 @@ public class Info implements Serializable {
         this.salt = salt;
     }
 
-    public Usuarios getIDFKusuario() {
-        return iDFKusuario;
+    public double getCartera() {
+        return cartera;
     }
 
-    public void setIDFKusuario(Usuarios iDFKusuario) {
-        this.iDFKusuario = iDFKusuario;
+    public void setCartera(double cartera) {
+        this.cartera = cartera;
+    }
+
+    public Usuarios getIdFkUsuario() {
+        return idFkUsuario;
+    }
+
+    public void setIdFkUsuario(Usuarios idFkUsuario) {
+        this.idFkUsuario = idFkUsuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iDinfo != null ? iDinfo.hashCode() : 0);
+        hash += (idInfo != null ? idInfo.hashCode() : 0);
         return hash;
     }
 
@@ -85,7 +98,7 @@ public class Info implements Serializable {
             return false;
         }
         Info other = (Info) object;
-        if ((this.iDinfo == null && other.iDinfo != null) || (this.iDinfo != null && !this.iDinfo.equals(other.iDinfo))) {
+        if ((this.idInfo == null && other.idInfo != null) || (this.idInfo != null && !this.idInfo.equals(other.idInfo))) {
             return false;
         }
         return true;
@@ -93,7 +106,7 @@ public class Info implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.Info[ iDinfo=" + iDinfo + " ]";
+        return "com.mycompany.proyecto.Pojos.Info[ idInfo=" + idInfo + " ]";
     }
 
 }

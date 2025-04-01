@@ -20,18 +20,19 @@ import javax.persistence.Table;
 @Table(name = "usuarios")
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
-    @NamedQuery(name = "Usuarios.findByIDusuario", query = "SELECT u FROM Usuarios u WHERE u.iDusuario = :iDusuario"),
+    @NamedQuery(name = "Usuarios.findByIdUsuario", query = "SELECT u FROM Usuarios u WHERE u.idUsuario = :idUsuario"),
     @NamedQuery(name = "Usuarios.findByNombre", query = "SELECT u FROM Usuarios u WHERE u.nombre = :nombre"),
     @NamedQuery(name = "Usuarios.findByApellidos", query = "SELECT u FROM Usuarios u WHERE u.apellidos = :apellidos"),
     @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario"),
+    @NamedQuery(name = "Usuarios.findByCorreo", query = "SELECT u FROM Usuarios u WHERE u.correo = :correo"),
     @NamedQuery(name = "Usuarios.findByPass", query = "SELECT u FROM Usuarios u WHERE u.pass = :pass")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID_usuario")
-    private Integer iDusuario;
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
@@ -42,34 +43,38 @@ public class Usuarios implements Serializable {
     @Column(name = "usuario")
     private String usuario;
     @Basic(optional = false)
+    @Column(name = "correo")
+    private String correo;
+    @Basic(optional = false)
     @Column(name = "pass")
     private String pass;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iDFKusuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFkUsuario")
     private Collection<Biblioteca> bibliotecaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iDFKusuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFkUsuario")
     private Collection<Info> infoCollection;
 
     public Usuarios() {
     }
 
-    public Usuarios(Integer iDusuario) {
-        this.iDusuario = iDusuario;
+    public Usuarios(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Usuarios(Integer iDusuario, String nombre, String apellidos, String usuario, String pass) {
-        this.iDusuario = iDusuario;
+    public Usuarios(Integer idUsuario, String nombre, String apellidos, String usuario, String correo, String pass) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.usuario = usuario;
+        this.correo = correo;
         this.pass = pass;
     }
 
-    public Integer getIDusuario() {
-        return iDusuario;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIDusuario(Integer iDusuario) {
-        this.iDusuario = iDusuario;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -94,6 +99,14 @@ public class Usuarios implements Serializable {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getPass() {
@@ -123,7 +136,7 @@ public class Usuarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iDusuario != null ? iDusuario.hashCode() : 0);
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
         return hash;
     }
 
@@ -134,7 +147,7 @@ public class Usuarios implements Serializable {
             return false;
         }
         Usuarios other = (Usuarios) object;
-        if ((this.iDusuario == null && other.iDusuario != null) || (this.iDusuario != null && !this.iDusuario.equals(other.iDusuario))) {
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
             return false;
         }
         return true;
@@ -142,7 +155,7 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.Usuarios[ iDusuario=" + iDusuario + " ]";
+        return "com.mycompany.proyecto.Pojos.Usuarios[ idUsuario=" + idUsuario + " ]";
     }
 
 }

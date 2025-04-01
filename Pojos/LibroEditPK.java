@@ -13,41 +13,41 @@ import javax.persistence.Embeddable;
 public class LibroEditPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "ID_FK_editorial")
-    private int iDFKeditorial;
+    @Column(name = "id_fk_editorial")
+    private int idFkEditorial;
     @Basic(optional = false)
-    @Column(name = "ID_FK_libro")
-    private int iDFKlibro;
+    @Column(name = "id_fk_libro")
+    private int idFkLibro;
 
     public LibroEditPK() {
     }
 
-    public LibroEditPK(int iDFKeditorial, int iDFKlibro) {
-        this.iDFKeditorial = iDFKeditorial;
-        this.iDFKlibro = iDFKlibro;
+    public LibroEditPK(int idFkEditorial, int idFkLibro) {
+        this.idFkEditorial = idFkEditorial;
+        this.idFkLibro = idFkLibro;
     }
 
-    public int getIDFKeditorial() {
-        return iDFKeditorial;
+    public int getIdFkEditorial() {
+        return idFkEditorial;
     }
 
-    public void setIDFKeditorial(int iDFKeditorial) {
-        this.iDFKeditorial = iDFKeditorial;
+    public void setIdFkEditorial(int idFkEditorial) {
+        this.idFkEditorial = idFkEditorial;
     }
 
-    public int getIDFKlibro() {
-        return iDFKlibro;
+    public int getIdFkLibro() {
+        return idFkLibro;
     }
 
-    public void setIDFKlibro(int iDFKlibro) {
-        this.iDFKlibro = iDFKlibro;
+    public void setIdFkLibro(int idFkLibro) {
+        this.idFkLibro = idFkLibro;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) iDFKeditorial;
-        hash += (int) iDFKlibro;
+        hash += (int) idFkEditorial;
+        hash += (int) idFkLibro;
         return hash;
     }
 
@@ -58,10 +58,10 @@ public class LibroEditPK implements Serializable {
             return false;
         }
         LibroEditPK other = (LibroEditPK) object;
-        if (this.iDFKeditorial != other.iDFKeditorial) {
+        if (this.idFkEditorial != other.idFkEditorial) {
             return false;
         }
-        if (this.iDFKlibro != other.iDFKlibro) {
+        if (this.idFkLibro != other.idFkLibro) {
             return false;
         }
         return true;
@@ -69,7 +69,7 @@ public class LibroEditPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.LibroEditPK[ iDFKeditorial=" + iDFKeditorial + ", iDFKlibro=" + iDFKlibro + " ]";
+        return "com.mycompany.proyecto.Pojos.LibroEditPK[ idFkEditorial=" + idFkEditorial + ", idFkLibro=" + idFkLibro + " ]";
     }
 
 }
