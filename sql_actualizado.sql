@@ -26,6 +26,11 @@ CREATE TABLE biblioteca (
     FOREIGN KEY (ID_FK_usuario) REFERENCES usuarios(ID_usuario) ON DELETE CASCADE
 );
 
+CREATE TABLE saga (
+    ID_saga INT PRIMARY KEY NOT NULL,
+    saga VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE libro (
     ID_libro VARCHAR PRIMARY KEY NOT NULL,
     titulo VARCHAR(50) NOT NULL,
@@ -42,11 +47,6 @@ CREATE TABLE libro (
     ID_FK_saga INT NOT NULL,
     FOREIGN KEY (ID_FK_saga) REFERENCES saga(ID_saga) ON DELETE CASCADE
 );
-
-CREATE TABLE saga (
-    ID_saga INT PRIMARY KEY NOT NULL,
-    saga VARCHAR(50) NOT NULL
-)
 
 CREATE TABLE autor (
     ID_autor INT PRIMARY KEY NOT NULL,
