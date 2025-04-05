@@ -38,8 +38,15 @@ CREATE TABLE libro (
     n_votos INT NOT NULL,
     valoracion INT NOT NULL,
     URLibro VARCHAR NOT NULL,
-    URLportada VARCHAR NOT NULL
+    URLportada VARCHAR NOT NULL,
+    ID_FK_saga INT NOT NULL,
+    FOREIGN KEY (ID_FK_saga) REFERENCES saga(ID_saga) ON DELETE CASCADE
 );
+
+CREATE TABLE saga (
+    ID_saga INT PRIMARY KEY NOT NULL,
+    saga VARCHAR(50) NOT NULL
+)
 
 CREATE TABLE autor (
     ID_autor INT PRIMARY KEY NOT NULL,
