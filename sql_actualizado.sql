@@ -1,8 +1,7 @@
 CREATE DATABASE biblioteca_db;
 
-
 CREATE TABLE usuario (
-    ID_usuario INT PRIMARY KEY NOT NULL,
+    ID_usuario SERIAL PRIMARY KEY,
     nombre VARCHAR(20),
     apellidos VARCHAR(40),
     usuario VARCHAR(15) NOT NULL,
@@ -10,24 +9,28 @@ CREATE TABLE usuario (
 );
 
 CREATE TABLE info_usuario (
-    ID_FK_usuario INT NOT NULL,
+    ID_FK_usuario INT PRIMARY KEY,
     semilla VARCHAR NOT NULL,
     cartera INT NOT NULL,
     fecha_registro DATE NOT NULL,
     ultimo_registro DATE NOT NULL,
-    PRIMARY KEY pk_usuario_seguridad PRIMARY KEY (ID_FK_usuario),
     FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
 );
 
+CREATE TABLE saga (
+    ID_saga SERIAL PRIMARY KEY,
+    saga VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE biblioteca (
-    ID_biblioteca INT PRIMARY KEY NOT NULL,
+    ID_biblioteca SERIAL PRIMARY KEY,
     ID_FK_usuario INT NOT NULL,
     ultimo_registro DATE NOT NULL,
     FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE libro (
-    ID_libro VARCHAR PRIMARY KEY NOT NULL,
+    ID_libro VARCHAR PRIMARY KEY,
     titulo VARCHAR(50) NOT NULL,
     fecha_publi DATE NOT NULL,
     precio DOUBLE PRECISION NOT NULL,
@@ -50,31 +53,26 @@ CREATE TABLE deseado (
     PRIMARY KEY (ID_FK_usuario, ID_FK_libro),
     FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE,
     FOREIGN KEY (ID_FK_libro) REFERENCES libro(ID_libro) ON DELETE CASCADE
-)
-
-CREATE TABLE saga (
-    ID_saga INT PRIMARY KEY NOT NULL,
-    saga VARCHAR(50) NOT NULL
-)
+);
 
 CREATE TABLE autor (
-    ID_autor INT PRIMARY KEY NOT NULL,
+    ID_autor SERIAL PRIMARY KEY,
     nombre VARCHAR(20),
     apellidos VARCHAR(40)
 );
 
 CREATE TABLE idioma(
-    ID_idioma INT PRIMARY KEY NOT NULL,
-    idioma varchar(20)
+    ID_idioma SERIAL PRIMARY KEY,
+    idioma VARCHAR(20)
 );
 
 CREATE TABLE genero(
-    ID_genero INT PRIMARY KEY NOT NULL,
-    genero varchar(20)
+    ID_genero SERIAL PRIMARY KEY,
+    genero VARCHAR(20)
 );
 
 CREATE TABLE editorial (
-    ID_editorial VARCHAR PRIMARY KEY NOT NULL,
+    ID_editorial VARCHAR PRIMARY KEY,
     nombre VARCHAR(40) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     correo VARCHAR(50) NOT NULL,
@@ -82,7 +80,7 @@ CREATE TABLE editorial (
     contacto VARCHAR(80),
     web VARCHAR,
     ID_FK_usuario INT NOT NULL,
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE;
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE biblio_libro (
@@ -107,7 +105,7 @@ CREATE TABLE libro_genero (
     ID_FK_libro VARCHAR NOT NULL,
     ID_FK_genero INT NOT NULL,
     PRIMARY KEY (ID_FK_genero, ID_FK_libro),
-    FOREIGN KEY (ID_FK_genero) REFERENCES genero(ID_genro) ON DELETE CASCADE,
+    FOREIGN KEY (ID_FK_genero) REFERENCES genero(ID_genero) ON DELETE CASCADE,
     FOREIGN KEY (ID_FK_libro) REFERENCES libro(ID_libro) ON DELETE CASCADE
 );
 
