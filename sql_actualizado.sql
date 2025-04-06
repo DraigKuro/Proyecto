@@ -14,7 +14,8 @@ CREATE TABLE info_usuario (
     cartera INT NOT NULL,
     fecha_registro DATE NOT NULL,
     ultimo_registro DATE NOT NULL,
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE,
+    CONSTRAINT unico_usuario_info_usuario UNIQUE (ID_FK_usuario)
 );
 
 CREATE TABLE saga (
@@ -26,7 +27,8 @@ CREATE TABLE biblioteca (
     ID_biblioteca SERIAL PRIMARY KEY,
     ID_FK_usuario INT NOT NULL,
     ultimo_registro DATE NOT NULL,
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE,
+    CONSTRAINT unico_usuario_biblioteca UNIQUE (ID_FK_usuario)
 );
 
 CREATE TABLE libro (
