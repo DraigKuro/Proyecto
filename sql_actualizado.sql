@@ -1,7 +1,7 @@
 CREATE DATABASE biblioteca_db;
 
 
-CREATE TABLE usuarios (
+CREATE TABLE usuario (
     ID_usuario INT PRIMARY KEY NOT NULL,
     nombre VARCHAR(20) NOT NULL,
     apellidos VARCHAR(40) NOT NULL,
@@ -15,20 +15,15 @@ CREATE TABLE info_usuario (
     cartera INT NOT NULL,
     fecha_registro DATE NOT NULL,
     ultimo_registro DATE NOT NULL,
-    PRIMARY KEY pk_usuarios_seguridad PRIMARY KEY (ID_FK_usuario),
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuarios(ID_usuario) ON DELETE CASCADE
+    PRIMARY KEY pk_usuario_seguridad PRIMARY KEY (ID_FK_usuario),
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE biblioteca (
     ID_biblioteca INT PRIMARY KEY NOT NULL,
     ID_FK_usuario INT NOT NULL,
     ultimo_registro DATE NOT NULL,
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuarios(ID_usuario) ON DELETE CASCADE
-);
-
-CREATE TABLE saga (
-    ID_saga INT PRIMARY KEY NOT NULL,
-    saga VARCHAR(50) NOT NULL
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE libro (
@@ -44,9 +39,23 @@ CREATE TABLE libro (
     valoracion INT NOT NULL,
     URLibro VARCHAR NOT NULL,
     URLportada VARCHAR NOT NULL,
-    ID_FK_saga INT ,
+    ID_FK_saga INT NOT NULL,
     FOREIGN KEY (ID_FK_saga) REFERENCES saga(ID_saga) ON DELETE CASCADE
 );
+
+CREATE TABLE deseado (
+    ID_FK_usuario INT NOT NULL,
+    ID_FK_libro VARCHAR NOT NULL,
+    fecha_registro DATE NOT NULL,
+    PRIMARY KEY (ID_FK_usuario, ID_FK_libro),
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (ID_FK_libro) REFERENCES libro(ID_libro) ON DELETE CASCADE
+)
+
+CREATE TABLE saga (
+    ID_saga INT PRIMARY KEY NOT NULL,
+    saga VARCHAR(50) NOT NULL
+)
 
 CREATE TABLE autor (
     ID_autor INT PRIMARY KEY NOT NULL,
@@ -73,7 +82,7 @@ CREATE TABLE editorial (
     contacto VARCHAR(80),
     web VARCHAR,
     ID_FK_usuario INT NOT NULL,
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuarios(ID_usuario) ON DELETE CASCADE;
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE;
 );
 
 CREATE TABLE biblio_libro (
