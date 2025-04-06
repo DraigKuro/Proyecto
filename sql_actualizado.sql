@@ -3,8 +3,8 @@ CREATE DATABASE biblioteca_db;
 
 CREATE TABLE usuario (
     ID_usuario INT PRIMARY KEY NOT NULL,
-    nombre VARCHAR(20) NOT NULL,
-    apellidos VARCHAR(40) NOT NULL,
+    nombre VARCHAR(20),
+    apellidos VARCHAR(40),
     usuario VARCHAR(15) NOT NULL,
     pass VARCHAR(50) NOT NULL
 );
