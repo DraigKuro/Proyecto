@@ -80,7 +80,8 @@ CREATE TABLE editorial (
     contacto VARCHAR(80),
     web VARCHAR,
     ID_FK_usuario INT NOT NULL,
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE
+    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE,
+    CONSTRAINT unico_usuario_editorial UNIQUE (ID_FK_usuario)
 );
 
 CREATE TABLE biblio_libro (
