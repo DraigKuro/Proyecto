@@ -44,7 +44,7 @@ CREATE TABLE libro (
     valoracion INT NOT NULL,
     URLibro VARCHAR NOT NULL,
     URLportada VARCHAR NOT NULL,
-    ID_FK_saga INT NOT NULL,
+    ID_FK_saga INT ,
     FOREIGN KEY (ID_FK_saga) REFERENCES saga(ID_saga) ON DELETE CASCADE
 );
 
