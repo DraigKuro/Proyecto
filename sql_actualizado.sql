@@ -90,6 +90,7 @@ CREATE TABLE biblio_libro (
     ID_FK_biblioteca INT NOT NULL,
     ID_FK_libro VARCHAR NOT NULL,
     fecha_compra DATE NOT NULL,
+    precio DOUBLE PRECISION NOT NULL,
     PRIMARY KEY (ID_FK_biblioteca, ID_FK_libro),
     FOREIGN KEY (ID_FK_biblioteca) REFERENCES biblioteca(ID_biblioteca) ON DELETE CASCADE,
     FOREIGN KEY (ID_FK_libro) REFERENCES libro(ID_libro) ON DELETE CASCADE
