@@ -5,17 +5,11 @@ CREATE TABLE usuario (
     nombre VARCHAR(20),
     apellidos VARCHAR(40),
     usuario VARCHAR(15) NOT NULL,
-    pass VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE info_usuario (
-    ID_FK_usuario INT PRIMARY KEY,
+    pass VARCHAR(50) NOT NULL,
     semilla VARCHAR NOT NULL,
     cartera INT NOT NULL,
     fecha_registro DATE NOT NULL,
-    ultimo_registro DATE NOT NULL,
-    FOREIGN KEY (ID_FK_usuario) REFERENCES usuario(ID_usuario) ON DELETE CASCADE,
-    CONSTRAINT unico_usuario_info_usuario UNIQUE (ID_FK_usuario)
+    ultimo_registro DATE NOT NULL
 );
 
 CREATE TABLE saga (
