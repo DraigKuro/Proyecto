@@ -1,18 +1,18 @@
-package com.mycompany.proyecto.Pojos;
+package com.tutienda.libros.models;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -53,7 +53,7 @@ public class LibroEdit implements Serializable {
         this.fechaAlta = fechaAlta;
     }
 
-    public LibroEdit(int idFkEditorial, int idFkLibro) {
+    public LibroEdit(String idFkEditorial, String idFkLibro) {
         this.libroEditPK = new LibroEditPK(idFkEditorial, idFkLibro);
     }
 
@@ -111,7 +111,7 @@ public class LibroEdit implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.LibroEdit[ libroEditPK=" + libroEditPK + " ]";
+        return "com.tutienda.libros.models.LibroEdit[ libroEditPK=" + libroEditPK + " ]";
     }
 
 }

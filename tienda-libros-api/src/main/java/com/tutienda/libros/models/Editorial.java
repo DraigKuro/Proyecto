@@ -1,16 +1,18 @@
-package com.mycompany.proyecto.Pojos;
+package com.tutienda.libros.models;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
@@ -22,7 +24,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "Editorial.findAll", query = "SELECT e FROM Editorial e"),
     @NamedQuery(name = "Editorial.findByIdEditorial", query = "SELECT e FROM Editorial e WHERE e.idEditorial = :idEditorial"),
     @NamedQuery(name = "Editorial.findByNombre", query = "SELECT e FROM Editorial e WHERE e.nombre = :nombre"),
-    @NamedQuery(name = "Editorial.findByNif", query = "SELECT e FROM Editorial e WHERE e.nif = :nif"),
     @NamedQuery(name = "Editorial.findByDireccion", query = "SELECT e FROM Editorial e WHERE e.direccion = :direccion"),
     @NamedQuery(name = "Editorial.findByCorreo", query = "SELECT e FROM Editorial e WHERE e.correo = :correo"),
     @NamedQuery(name = "Editorial.findByTelefono", query = "SELECT e FROM Editorial e WHERE e.telefono = :telefono"),
@@ -34,13 +35,10 @@ public class Editorial implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id_editorial")
-    private Integer idEditorial;
+    private String idEditorial;
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-    @Basic(optional = false)
-    @Column(name = "nif")
-    private String nif;
     @Basic(optional = false)
     @Column(name = "direccion")
     private String direccion;
@@ -49,35 +47,37 @@ public class Editorial implements Serializable {
     private String correo;
     @Basic(optional = false)
     @Column(name = "telefono")
-    private int telefono;
+    private String telefono;
     @Column(name = "contacto")
     private String contacto;
     @Column(name = "web")
     private String web;
+    @JoinColumn(name = "id_fk_usuario", referencedColumnName = "id_usuario")
+    @OneToOne(optional = false)
+    private Usuario idFkUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editorial")
     private Collection<LibroEdit> libroEditCollection;
 
     public Editorial() {
     }
 
-    public Editorial(Integer idEditorial) {
+    public Editorial(String idEditorial) {
         this.idEditorial = idEditorial;
     }
 
-    public Editorial(Integer idEditorial, String nombre, String nif, String direccion, String correo, int telefono) {
+    public Editorial(String idEditorial, String nombre, String direccion, String correo, String telefono) {
         this.idEditorial = idEditorial;
         this.nombre = nombre;
-        this.nif = nif;
         this.direccion = direccion;
         this.correo = correo;
         this.telefono = telefono;
     }
 
-    public Integer getIdEditorial() {
+    public String getIdEditorial() {
         return idEditorial;
     }
 
-    public void setIdEditorial(Integer idEditorial) {
+    public void setIdEditorial(String idEditorial) {
         this.idEditorial = idEditorial;
     }
 
@@ -87,14 +87,6 @@ public class Editorial implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getNif() {
-        return nif;
-    }
-
-    public void setNif(String nif) {
-        this.nif = nif;
     }
 
     public String getDireccion() {
@@ -113,11 +105,11 @@ public class Editorial implements Serializable {
         this.correo = correo;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -135,6 +127,14 @@ public class Editorial implements Serializable {
 
     public void setWeb(String web) {
         this.web = web;
+    }
+
+    public Usuario getIdFkUsuario() {
+        return idFkUsuario;
+    }
+
+    public void setIdFkUsuario(Usuario idFkUsuario) {
+        this.idFkUsuario = idFkUsuario;
     }
 
     public Collection<LibroEdit> getLibroEditCollection() {
@@ -167,7 +167,7 @@ public class Editorial implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.Editorial[ idEditorial=" + idEditorial + " ]";
+        return "com.tutienda.libros.models.Editorial[ idEditorial=" + idEditorial + " ]";
     }
 
 }

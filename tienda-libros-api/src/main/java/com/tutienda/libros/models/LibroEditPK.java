@@ -1,9 +1,9 @@
-package com.mycompany.proyecto.Pojos;
+package com.tutienda.libros.models;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 
 /**
  *
@@ -14,40 +14,40 @@ public class LibroEditPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "id_fk_editorial")
-    private int idFkEditorial;
+    private String idFkEditorial;
     @Basic(optional = false)
     @Column(name = "id_fk_libro")
-    private int idFkLibro;
+    private String idFkLibro;
 
     public LibroEditPK() {
     }
 
-    public LibroEditPK(int idFkEditorial, int idFkLibro) {
+    public LibroEditPK(String idFkEditorial, String idFkLibro) {
         this.idFkEditorial = idFkEditorial;
         this.idFkLibro = idFkLibro;
     }
 
-    public int getIdFkEditorial() {
+    public String getIdFkEditorial() {
         return idFkEditorial;
     }
 
-    public void setIdFkEditorial(int idFkEditorial) {
+    public void setIdFkEditorial(String idFkEditorial) {
         this.idFkEditorial = idFkEditorial;
     }
 
-    public int getIdFkLibro() {
+    public String getIdFkLibro() {
         return idFkLibro;
     }
 
-    public void setIdFkLibro(int idFkLibro) {
+    public void setIdFkLibro(String idFkLibro) {
         this.idFkLibro = idFkLibro;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idFkEditorial;
-        hash += (int) idFkLibro;
+        hash += (idFkEditorial != null ? idFkEditorial.hashCode() : 0);
+        hash += (idFkLibro != null ? idFkLibro.hashCode() : 0);
         return hash;
     }
 
@@ -58,10 +58,10 @@ public class LibroEditPK implements Serializable {
             return false;
         }
         LibroEditPK other = (LibroEditPK) object;
-        if (this.idFkEditorial != other.idFkEditorial) {
+        if ((this.idFkEditorial == null && other.idFkEditorial != null) || (this.idFkEditorial != null && !this.idFkEditorial.equals(other.idFkEditorial))) {
             return false;
         }
-        if (this.idFkLibro != other.idFkLibro) {
+        if ((this.idFkLibro == null && other.idFkLibro != null) || (this.idFkLibro != null && !this.idFkLibro.equals(other.idFkLibro))) {
             return false;
         }
         return true;
@@ -69,7 +69,7 @@ public class LibroEditPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.LibroEditPK[ idFkEditorial=" + idFkEditorial + ", idFkLibro=" + idFkLibro + " ]";
+        return "com.tutienda.libros.models.LibroEditPK[ idFkEditorial=" + idFkEditorial + ", idFkLibro=" + idFkLibro + " ]";
     }
 
 }

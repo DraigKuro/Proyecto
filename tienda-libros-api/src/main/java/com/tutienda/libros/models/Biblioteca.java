@@ -1,18 +1,23 @@
-package com.mycompany.proyecto.Pojos;
+package com.tutienda.libros.models;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.Date;
 
 /**
  *
@@ -23,33 +28,29 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Biblioteca.findAll", query = "SELECT b FROM Biblioteca b"),
     @NamedQuery(name = "Biblioteca.findByIdBiblioteca", query = "SELECT b FROM Biblioteca b WHERE b.idBiblioteca = :idBiblioteca"),
-    @NamedQuery(name = "Biblioteca.findByCantidadLibros", query = "SELECT b FROM Biblioteca b WHERE b.cantidadLibros = :cantidadLibros")})
+    @NamedQuery(name = "Biblioteca.findByUltimoRegistro", query = "SELECT b FROM Biblioteca b WHERE b.ultimoRegistro = :ultimoRegistro")})
 public class Biblioteca implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_biblioteca")
     private Integer idBiblioteca;
-    @Basic(optional = false)
-    @Column(name = "cantidad_libros")
-    private int cantidadLibros;
+    @Column(name = "ultimo_registro")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ultimoRegistro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "biblioteca")
     private Collection<BiblioLibro> biblioLibroCollection;
     @JoinColumn(name = "id_fk_usuario", referencedColumnName = "id_usuario")
-    @ManyToOne(optional = false)
-    private Usuarios idFkUsuario;
+    @OneToOne(optional = false)
+    private Usuario idFkUsuario;
 
     public Biblioteca() {
     }
 
     public Biblioteca(Integer idBiblioteca) {
         this.idBiblioteca = idBiblioteca;
-    }
-
-    public Biblioteca(Integer idBiblioteca, int cantidadLibros) {
-        this.idBiblioteca = idBiblioteca;
-        this.cantidadLibros = cantidadLibros;
     }
 
     public Integer getIdBiblioteca() {
@@ -60,12 +61,12 @@ public class Biblioteca implements Serializable {
         this.idBiblioteca = idBiblioteca;
     }
 
-    public int getCantidadLibros() {
-        return cantidadLibros;
+    public Date getUltimoRegistro() {
+        return ultimoRegistro;
     }
 
-    public void setCantidadLibros(int cantidadLibros) {
-        this.cantidadLibros = cantidadLibros;
+    public void setUltimoRegistro(Date ultimoRegistro) {
+        this.ultimoRegistro = ultimoRegistro;
     }
 
     public Collection<BiblioLibro> getBiblioLibroCollection() {
@@ -76,11 +77,11 @@ public class Biblioteca implements Serializable {
         this.biblioLibroCollection = biblioLibroCollection;
     }
 
-    public Usuarios getIdFkUsuario() {
+    public Usuario getIdFkUsuario() {
         return idFkUsuario;
     }
 
-    public void setIdFkUsuario(Usuarios idFkUsuario) {
+    public void setIdFkUsuario(Usuario idFkUsuario) {
         this.idFkUsuario = idFkUsuario;
     }
 
@@ -106,7 +107,7 @@ public class Biblioteca implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.Biblioteca[ idBiblioteca=" + idBiblioteca + " ]";
+        return "com.tutienda.libros.models.Biblioteca[ idBiblioteca=" + idBiblioteca + " ]";
     }
 
 }

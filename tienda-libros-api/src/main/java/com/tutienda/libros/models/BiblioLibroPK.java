@@ -1,9 +1,9 @@
-package com.mycompany.proyecto.Pojos;
+package com.tutienda.libros.models;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 
 /**
  *
@@ -17,12 +17,12 @@ public class BiblioLibroPK implements Serializable {
     private int idFkBiblioteca;
     @Basic(optional = false)
     @Column(name = "id_fk_libro")
-    private int idFkLibro;
+    private String idFkLibro;
 
     public BiblioLibroPK() {
     }
 
-    public BiblioLibroPK(int idFkBiblioteca, int idFkLibro) {
+    public BiblioLibroPK(int idFkBiblioteca, String idFkLibro) {
         this.idFkBiblioteca = idFkBiblioteca;
         this.idFkLibro = idFkLibro;
     }
@@ -35,11 +35,11 @@ public class BiblioLibroPK implements Serializable {
         this.idFkBiblioteca = idFkBiblioteca;
     }
 
-    public int getIdFkLibro() {
+    public String getIdFkLibro() {
         return idFkLibro;
     }
 
-    public void setIdFkLibro(int idFkLibro) {
+    public void setIdFkLibro(String idFkLibro) {
         this.idFkLibro = idFkLibro;
     }
 
@@ -47,7 +47,7 @@ public class BiblioLibroPK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (int) idFkBiblioteca;
-        hash += (int) idFkLibro;
+        hash += (idFkLibro != null ? idFkLibro.hashCode() : 0);
         return hash;
     }
 
@@ -61,7 +61,7 @@ public class BiblioLibroPK implements Serializable {
         if (this.idFkBiblioteca != other.idFkBiblioteca) {
             return false;
         }
-        if (this.idFkLibro != other.idFkLibro) {
+        if ((this.idFkLibro == null && other.idFkLibro != null) || (this.idFkLibro != null && !this.idFkLibro.equals(other.idFkLibro))) {
             return false;
         }
         return true;
@@ -69,7 +69,7 @@ public class BiblioLibroPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.BiblioLibroPK[ idFkBiblioteca=" + idFkBiblioteca + ", idFkLibro=" + idFkLibro + " ]";
+        return "com.tutienda.libros.models.BiblioLibroPK[ idFkBiblioteca=" + idFkBiblioteca + ", idFkLibro=" + idFkLibro + " ]";
     }
 
 }

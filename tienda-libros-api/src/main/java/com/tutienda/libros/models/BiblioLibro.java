@@ -1,18 +1,19 @@
-package com.mycompany.proyecto.Pojos;
+package com.tutienda.libros.models;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,7 +25,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "BiblioLibro.findAll", query = "SELECT b FROM BiblioLibro b"),
     @NamedQuery(name = "BiblioLibro.findByIdFkBiblioteca", query = "SELECT b FROM BiblioLibro b WHERE b.biblioLibroPK.idFkBiblioteca = :idFkBiblioteca"),
     @NamedQuery(name = "BiblioLibro.findByIdFkLibro", query = "SELECT b FROM BiblioLibro b WHERE b.biblioLibroPK.idFkLibro = :idFkLibro"),
-    @NamedQuery(name = "BiblioLibro.findByFechaCompra", query = "SELECT b FROM BiblioLibro b WHERE b.fechaCompra = :fechaCompra")})
+    @NamedQuery(name = "BiblioLibro.findByFechaCompra", query = "SELECT b FROM BiblioLibro b WHERE b.fechaCompra = :fechaCompra"),
+    @NamedQuery(name = "BiblioLibro.findByPrecio", query = "SELECT b FROM BiblioLibro b WHERE b.precio = :precio")})
 public class BiblioLibro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +36,10 @@ public class BiblioLibro implements Serializable {
     @Column(name = "fecha_compra")
     @Temporal(TemporalType.DATE)
     private Date fechaCompra;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @Column(name = "precio")
+    private BigDecimal precio;
     @JoinColumn(name = "id_fk_biblioteca", referencedColumnName = "id_biblioteca", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Biblioteca biblioteca;
@@ -48,12 +54,13 @@ public class BiblioLibro implements Serializable {
         this.biblioLibroPK = biblioLibroPK;
     }
 
-    public BiblioLibro(BiblioLibroPK biblioLibroPK, Date fechaCompra) {
+    public BiblioLibro(BiblioLibroPK biblioLibroPK, Date fechaCompra, BigDecimal precio) {
         this.biblioLibroPK = biblioLibroPK;
         this.fechaCompra = fechaCompra;
+        this.precio = precio;
     }
 
-    public BiblioLibro(int idFkBiblioteca, int idFkLibro) {
+    public BiblioLibro(int idFkBiblioteca, String idFkLibro) {
         this.biblioLibroPK = new BiblioLibroPK(idFkBiblioteca, idFkLibro);
     }
 
@@ -71,6 +78,14 @@ public class BiblioLibro implements Serializable {
 
     public void setFechaCompra(Date fechaCompra) {
         this.fechaCompra = fechaCompra;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
     }
 
     public Biblioteca getBiblioteca() {
@@ -111,7 +126,7 @@ public class BiblioLibro implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.proyecto.Pojos.BiblioLibro[ biblioLibroPK=" + biblioLibroPK + " ]";
+        return "com.tutienda.libros.models.BiblioLibro[ biblioLibroPK=" + biblioLibroPK + " ]";
     }
 
 }
