@@ -1,19 +1,41 @@
 package com.tutienda.libros.dto;
 
-public class UsuarioDTO {
+import java.math.BigDecimal;
 
-    private Integer idUsuario;
+public class UsuarioDTO {
+    private String usuario;
+    private String pass;  // Contraseña en texto plano para el registro
     private String nombre;
     private String apellidos;
-    private String correo;
+    private BigDecimal cartera;
 
-    // Getters y Setters
-    public Integer getIdUsuario() {
-        return idUsuario;
+    // Constructor vacío
+    public UsuarioDTO() {}
+
+    // Constructor con todos los parámetros
+    public UsuarioDTO(String usuario, String pass, String nombre, String apellidos, BigDecimal cartera) {
+        this.usuario = usuario;
+        this.pass = pass;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.cartera = cartera;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    // Getters y Setters
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getNombre() {
@@ -32,11 +54,33 @@ public class UsuarioDTO {
         this.apellidos = apellidos;
     }
 
-    public String getCorreo() {
-        return correo;
+    public BigDecimal getCartera() {
+        return cartera;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCartera(BigDecimal cartera) {
+        this.cartera = cartera;
+    }
+
+    // Método para transformar un DTO a entidad Usuario
+    public static UsuarioDTO fromEntity(com.tutienda.libros.models.Usuario usuario) {
+        return new UsuarioDTO(
+                usuario.getUsuario(),
+                null,  // La contraseña no se debe incluir en el DTO de la respuesta
+                usuario.getNombre(),
+                usuario.getApellidos(),
+                usuario.getCartera()
+        );
+    }
+
+    // Método para convertir el DTO a una entidad Usuario (para crear un nuevo usuario)
+    public com.tutienda.libros.models.Usuario toEntity(String semillaHashedPassword) {
+        com.tutienda.libros.models.Usuario usuario = new com.tutienda.libros.models.Usuario();
+        usuario.setUsuario(this.usuario);
+        usuario.setPass(semillaHashedPassword);  // Se pasa la contraseña hasheada con la semilla
+        usuario.setNombre(this.nombre);
+        usuario.setApellidos(this.apellidos);
+        usuario.setCartera(this.cartera);
+        return usuario;
     }
 }
