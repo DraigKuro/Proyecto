@@ -1,4 +1,4 @@
-package com.tutienda.libros.dto;
+package com.tutienda.libros.api.dto;
 
 import java.math.BigDecimal;
 
@@ -63,7 +63,7 @@ public class UsuarioDTO {
     }
 
     // Método para transformar un DTO a entidad Usuario
-    public static UsuarioDTO fromEntity(com.tutienda.libros.models.Usuario usuario) {
+    public static UsuarioDTO fromEntity(com.tutienda.libros.api.models.Usuario usuario) {
         return new UsuarioDTO(
                 usuario.getUsuario(),
                 null,  // La contraseña no se debe incluir en el DTO de la respuesta
@@ -74,8 +74,8 @@ public class UsuarioDTO {
     }
 
     // Método para convertir el DTO a una entidad Usuario (para crear un nuevo usuario)
-    public com.tutienda.libros.models.Usuario toEntity(String semillaHashedPassword) {
-        com.tutienda.libros.models.Usuario usuario = new com.tutienda.libros.models.Usuario();
+    public com.tutienda.libros.api.models.Usuario toEntity(String semillaHashedPassword) {
+        com.tutienda.libros.api.models.Usuario usuario = new com.tutienda.libros.api.models.Usuario();
         usuario.setUsuario(this.usuario);
         usuario.setPass(semillaHashedPassword);  // Se pasa la contraseña hasheada con la semilla
         usuario.setNombre(this.nombre);

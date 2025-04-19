@@ -1,4 +1,4 @@
-package com.tutienda.libros.config;
+package com.tutienda.libros.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,14 +23,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/usuarios/**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 )
                 .formLogin(form -> form.disable())
-                .httpBasic(httpBasic -> httpBasic.disable())
-                .sessionManagement(session -> session // 👈 ¡Añadido!
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+                .httpBasic(httpBasic -> httpBasic.disable());
 
         return http.build();
     }

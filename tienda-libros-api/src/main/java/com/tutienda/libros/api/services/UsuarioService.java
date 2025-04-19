@@ -1,6 +1,6 @@
-package com.tutienda.libros.services;
+package com.tutienda.libros.api.services;
 
-import com.tutienda.libros.models.Usuario;
+import com.tutienda.libros.api.models.Usuario;
 
 import java.util.Optional;
 

@@ -1,8 +1,8 @@
-package com.tutienda.libros.services.impl;
+package com.tutienda.libros.api.services.impl;
 
-import com.tutienda.libros.models.Usuario;
-import com.tutienda.libros.repositories.UsuarioRepository;
-import com.tutienda.libros.services.UsuarioService;
+import com.tutienda.libros.api.models.Usuario;
+import com.tutienda.libros.api.repositories.UsuarioRepository;
+import com.tutienda.libros.api.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -2,20 +2,20 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="com.tutienda.libros_tienda-libros-api_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.tutienda.libros.models.Biblioteca</class>
-    <class>com.tutienda.libros.models.Libro</class>
     <class>com.tutienda.libros.models.Usuarios</class>
-    <class>com.tutienda.libros.models.BiblioLibro</class>
-    <class>com.tutienda.libros.models.LibroEdit</class>
-    <class>com.tutienda.libros.models.Editorial</class>
     <class>com.tutienda.libros.models.Info</class>
-    <class>com.tutienda.libros.models.LibroAutor</class>
-    <class>com.tutienda.libros.models.Idioma</class>
-    <class>com.tutienda.libros.models.Saga</class>
-    <class>com.tutienda.libros.models.Autor</class>
-    <class>com.tutienda.libros.models.Usuario</class>
-    <class>com.tutienda.libros.models.Genero</class>
-    <class>com.tutienda.libros.models.Deseado</class>
+    <class>com.tutienda.libros.api.models.Editorial</class>
+    <class>com.tutienda.libros.api.models.Idioma</class>
+    <class>com.tutienda.libros.api.models.LibroEdit</class>
+    <class>com.tutienda.libros.api.models.Autor</class>
+    <class>com.tutienda.libros.api.models.BiblioLibro</class>
+    <class>com.tutienda.libros.api.models.Saga</class>
+    <class>com.tutienda.libros.api.models.Usuario</class>
+    <class>com.tutienda.libros.api.models.Biblioteca</class>
+    <class>com.tutienda.libros.api.models.Deseado</class>
+    <class>com.tutienda.libros.api.models.Genero</class>
+    <class>com.tutienda.libros.api.models.Libro</class>
+    <class>com.tutienda.libros.api.models.LibroAutor</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/biblioteca_db"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

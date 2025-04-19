@@ -1,8 +1,8 @@
-package com.tutienda.libros.controllers;
+package com.tutienda.libros.api.controllers;
 
-import com.tutienda.libros.dto.UsuarioDTO;
-import com.tutienda.libros.models.Usuario;
-import com.tutienda.libros.services.UsuarioService;
+import com.tutienda.libros.api.dto.UsuarioDTO;
+import com.tutienda.libros.api.models.Usuario;
+import com.tutienda.libros.api.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

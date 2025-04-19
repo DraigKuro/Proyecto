@@ -1,4 +1,4 @@
-package com.tutienda.libros.models;
+package com.tutienda.libros.api.models;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
