@@ -1,12 +1,9 @@
 Ajustes para Uso Local - Proyecto Biblioteca
 Requisitos Previos
-
     Java JDK 8 o superior instalado
-
     PostgreSQL instalado y en ejecución
-
     Maven instalado (para manejo de dependencias)
-
+    
 Configuración de la Base de Datos
 
     Crear la base de datos:
