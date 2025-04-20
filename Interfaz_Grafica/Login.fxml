@@ -140,7 +140,7 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane id="paneLogin" prefHeight="550.0" prefWidth="400.0" style="-fx-background-color: #3d0566;">
+                  <Pane id="paneLogin" prefHeight="550.0" prefWidth="400.0" style="-fx-background-color: #25073b;">
                      <children>
                         <Label layoutX="26.0" layoutY="124.0" text="Usuario / Correo" textFill="WHITE">
                            <font>
@@ -154,7 +154,7 @@
                         </Label>
                         <TextField layoutX="26.0" layoutY="230.0" prefHeight="25.0" prefWidth="350.0" />
                         <TextField layoutX="26.0" layoutY="158.0" prefHeight="25.0" prefWidth="350.0" />
-                        <Button layoutX="126.0" layoutY="486.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #650aa9; -fx-border-color: #000000; -fx-border-width: 3px;" text="Iniciar sesion" textFill="WHITE">
+                        <Button layoutX="126.0" layoutY="486.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #650aa9; -fx-border-color: #3d0566; -fx-border-width: 3px;" text="Iniciar sesion" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -178,7 +178,7 @@
                   </Pane>
                </children>
             </StackPane>
-            <Pane prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: #3d0566;">
+            <Pane prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: #25073b;">
                <children>
                   <ImageView fitHeight="218.0" fitWidth="146.0" layoutX="127.0" layoutY="16.0" pickOnBounds="true">
                      <image>
