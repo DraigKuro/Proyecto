@@ -101,7 +101,7 @@ public class Autor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Autor[ idAutor=" + idAutor + " ]";
+        return "com.tutienda.libros.api.models.Autor[ idAutor=" + idAutor + " ]";
     }
 
 }

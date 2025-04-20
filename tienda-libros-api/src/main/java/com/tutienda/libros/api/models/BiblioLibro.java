@@ -126,7 +126,7 @@ public class BiblioLibro implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.BiblioLibro[ biblioLibroPK=" + biblioLibroPK + " ]";
+        return "com.tutienda.libros.api.models.BiblioLibro[ biblioLibroPK=" + biblioLibroPK + " ]";
     }
 
 }

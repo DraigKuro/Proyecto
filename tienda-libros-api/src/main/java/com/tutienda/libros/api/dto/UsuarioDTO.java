@@ -80,7 +80,6 @@ public class UsuarioDTO {
         usuario.setPass(semillaHashedPassword);  // Se pasa la contraseña hasheada con la semilla
         usuario.setNombre(this.nombre);
         usuario.setApellidos(this.apellidos);
-        usuario.setCartera(this.cartera);
         return usuario;
     }
 }

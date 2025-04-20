@@ -107,7 +107,7 @@ public class Biblioteca implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Biblioteca[ idBiblioteca=" + idBiblioteca + " ]";
+        return "com.tutienda.libros.api.models.Biblioteca[ idBiblioteca=" + idBiblioteca + " ]";
     }
 
 }

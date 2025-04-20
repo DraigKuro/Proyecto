@@ -167,7 +167,7 @@ public class Editorial implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Editorial[ idEditorial=" + idEditorial + " ]";
+        return "com.tutienda.libros.api.models.Editorial[ idEditorial=" + idEditorial + " ]";
     }
 
 }

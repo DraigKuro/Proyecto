@@ -95,7 +95,7 @@ public class Saga implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Saga[ idSaga=" + idSaga + " ]";
+        return "com.tutienda.libros.api.models.Saga[ idSaga=" + idSaga + " ]";
     }
 
 }

@@ -213,7 +213,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "com.tutienda.libros.api.models.Usuario[ idUsuario=" + idUsuario + " ]";
     }
 
 }

@@ -111,7 +111,7 @@ public class LibroEdit implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.LibroEdit[ libroEditPK=" + libroEditPK + " ]";
+        return "com.tutienda.libros.api.models.LibroEdit[ libroEditPK=" + libroEditPK + " ]";
     }
 
 }

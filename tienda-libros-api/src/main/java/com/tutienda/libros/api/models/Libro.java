@@ -285,7 +285,7 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Libro[ idLibro=" + idLibro + " ]";
+        return "com.tutienda.libros.api.models.Libro[ idLibro=" + idLibro + " ]";
     }
 
 }

@@ -111,7 +111,7 @@ public class Deseado implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Deseado[ deseadoPK=" + deseadoPK + " ]";
+        return "com.tutienda.libros.api.models.Deseado[ deseadoPK=" + deseadoPK + " ]";
     }
 
 }

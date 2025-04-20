@@ -94,7 +94,7 @@ public class Genero implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Genero[ idGenero=" + idGenero + " ]";
+        return "com.tutienda.libros.api.models.Genero[ idGenero=" + idGenero + " ]";
     }
 
 }

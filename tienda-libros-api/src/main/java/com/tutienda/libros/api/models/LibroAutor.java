@@ -100,7 +100,7 @@ public class LibroAutor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.LibroAutor[ libroAutorPK=" + libroAutorPK + " ]";
+        return "com.tutienda.libros.api.models.LibroAutor[ libroAutorPK=" + libroAutorPK + " ]";
     }
 
 }

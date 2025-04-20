@@ -20,4 +20,7 @@ public interface UsuarioService {
 
     // Buscar por nombre de usuario (para perfil, etc.)
     Optional<Usuario> buscarPorUsuario(String usuario);
+    
+    // Nuevo método para actualizar la contraseña
+    boolean actualizarContraseña(String usuario, String contraseñaAntigua, String contraseñaNueva);
 }

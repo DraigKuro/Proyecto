@@ -69,7 +69,7 @@ public class DeseadoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.DeseadoPK[ idFkUsuario=" + idFkUsuario + ", idFkLibro=" + idFkLibro + " ]";
+        return "com.tutienda.libros.api.models.DeseadoPK[ idFkUsuario=" + idFkUsuario + ", idFkLibro=" + idFkLibro + " ]";
     }
 
 }

@@ -69,7 +69,7 @@ public class BiblioLibroPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.BiblioLibroPK[ idFkBiblioteca=" + idFkBiblioteca + ", idFkLibro=" + idFkLibro + " ]";
+        return "com.tutienda.libros.api.models.BiblioLibroPK[ idFkBiblioteca=" + idFkBiblioteca + ", idFkLibro=" + idFkLibro + " ]";
     }
 
 }

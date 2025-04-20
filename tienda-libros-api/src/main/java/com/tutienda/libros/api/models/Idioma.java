@@ -94,7 +94,7 @@ public class Idioma implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tutienda.libros.models.Idioma[ idIdioma=" + idIdioma + " ]";
+        return "com.tutienda.libros.api.models.Idioma[ idIdioma=" + idIdioma + " ]";
     }
 
 }
