@@ -1,16 +1,21 @@
 package com.tutienda.libros.api.dto;
 
+import com.tutienda.libros.api.models.Editorial;
+import com.tutienda.libros.api.models.Usuario;
 import java.math.BigDecimal;
 
 public class UsuarioDTO {
+
     private String usuario;
-    private String pass;  // Contraseña en texto plano para el registro
+    private String pass;
     private String nombre;
     private String apellidos;
     private BigDecimal cartera;
+    private Editorial editorial;
 
     // Constructor vacío
-    public UsuarioDTO() {}
+    public UsuarioDTO() {
+    }
 
     // Constructor con todos los parámetros
     public UsuarioDTO(String usuario, String pass, String nombre, String apellidos, BigDecimal cartera) {
@@ -62,24 +67,32 @@ public class UsuarioDTO {
         this.cartera = cartera;
     }
 
+    public Editorial getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(Editorial editorial) {
+        this.editorial = editorial;
+    }
+
     // Método para transformar un DTO a entidad Usuario
-    public static UsuarioDTO fromEntity(com.tutienda.libros.api.models.Usuario usuario) {
+    public static UsuarioDTO fromEntity(Usuario usuario) {
         return new UsuarioDTO(
                 usuario.getUsuario(),
-                null,  // La contraseña no se debe incluir en el DTO de la respuesta
+                null, // La contraseña no se debe incluir en el DTO de la respuesta
                 usuario.getNombre(),
                 usuario.getApellidos(),
                 usuario.getCartera()
         );
     }
 
-    // Método para convertir el DTO a una entidad Usuario (para crear un nuevo usuario)
-    public com.tutienda.libros.api.models.Usuario toEntity(String semillaHashedPassword) {
-        com.tutienda.libros.api.models.Usuario usuario = new com.tutienda.libros.api.models.Usuario();
-        usuario.setUsuario(this.usuario);
-        usuario.setPass(semillaHashedPassword);  // Se pasa la contraseña hasheada con la semilla
-        usuario.setNombre(this.nombre);
-        usuario.setApellidos(this.apellidos);
-        return usuario;
+    public Usuario toEntity(String semillaHashedPassword) {
+        Usuario user = new Usuario();
+        user.setUsuario(this.usuario);
+        user.setPass(semillaHashedPassword);
+        user.setNombre(this.nombre);
+        user.setApellidos(this.apellidos);
+        user.setEditorial(this.editorial);
+        return user;
     }
 }

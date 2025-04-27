@@ -1,4 +1,4 @@
-package com.tutienda.libros.api.mappers;
+package com.tutienda.libros.api.utils;
 
 import com.tutienda.libros.api.dto.LibroDTO;
 import com.tutienda.libros.api.models.Libro;
@@ -8,7 +8,24 @@ import org.springframework.stereotype.Component;
 public class LibroMapper {
 
     public LibroDTO toDto(Libro libro) {
+        if (libro == null) {
+            return null;
+        }
         LibroDTO dto = new LibroDTO();
+        copyPropertiesToDto(libro, dto);
+        return dto;
+    }
+
+    public Libro toEntity(LibroDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+        Libro libro = new Libro();
+        copyPropertiesToEntity(dto, libro);
+        return libro;
+    }
+
+    private void copyPropertiesToDto(Libro libro, LibroDTO dto) {
         dto.setIdLibro(libro.getIdLibro());
         dto.setTitulo(libro.getTitulo());
         dto.setFechaPubli(libro.getFechaPubli());
@@ -19,13 +36,11 @@ public class LibroMapper {
         dto.setSinopsis(libro.getSinopsis());
         dto.setnVotos(libro.getNVotos());
         dto.setValoracion(libro.getValoracion());
-        dto.setUrlLibro(libro.getUrlibro());  // Cambiado a urlLibro (consistente con DTO)
-        dto.setUrlPortada(libro.getUrlportada()); // Cambiado a urlPortada
-        return dto;
+        dto.setUrlLibro(libro.getUrlibro());
+        dto.setUrlPortada(libro.getUrlportada());
     }
 
-    public Libro toEntity(LibroDTO dto) {
-        Libro libro = new Libro();
+    private void copyPropertiesToEntity(LibroDTO dto, Libro libro) {
         libro.setIdLibro(dto.getIdLibro());
         libro.setTitulo(dto.getTitulo());
         libro.setFechaPubli(dto.getFechaPubli());
@@ -36,8 +51,7 @@ public class LibroMapper {
         libro.setSinopsis(dto.getSinopsis());
         libro.setNVotos(dto.getnVotos());
         libro.setValoracion(dto.getValoracion());
-        libro.setUrlibro(dto.getUrlLibro());  // Cambiado a getUrlLibro()
-        libro.setUrlportada(dto.getUrlPortada()); // Cambiado a getUrlPortada()
-        return libro;
+        libro.setUrlibro(dto.getUrlLibro());
+        libro.setUrlportada(dto.getUrlPortada());
     }
 }

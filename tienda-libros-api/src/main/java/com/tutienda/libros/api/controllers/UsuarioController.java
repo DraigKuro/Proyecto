@@ -1,15 +1,17 @@
 package com.tutienda.libros.api.controllers;
 
-import com.tutienda.libros.api.dto.*;
 import com.tutienda.libros.api.models.Usuario;
 import com.tutienda.libros.api.services.UsuarioService;
-import java.math.BigDecimal;
+import com.tutienda.libros.api.dto.UsuarioDTO;
+import com.tutienda.libros.api.dto.ActualizarContraseñaDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -21,16 +23,7 @@ public class UsuarioController {
     // Registrar un nuevo usuario
     @PostMapping("/registrar")
     public ResponseEntity<String> registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        // Convertir DTO a entidad Usuario
-        Usuario usuario = new Usuario();
-        usuario.setUsuario(usuarioDTO.getUsuario());
-        usuario.setPass(usuarioDTO.getPass());  // La contraseña recibida será hasheada en el servicio
-        usuario.setNombre(usuarioDTO.getNombre());
-        usuario.setApellidos(usuarioDTO.getApellidos());
-
-        // Registrar usuario
-        usuarioService.registrarUsuario(usuario);
-
+        usuarioService.registrarUsuario(usuarioDTO);
         return new ResponseEntity<>("Usuario registrado exitosamente", HttpStatus.CREATED);
     }
 
@@ -52,21 +45,8 @@ public class UsuarioController {
     // Actualizar datos de un usuario existente
     @PutMapping("/actualizar/{usuario}")
     public ResponseEntity<UsuarioDTO> actualizarDatosUsuario(@PathVariable String usuario, @RequestBody UsuarioDTO usuarioDTO) {
-        Usuario usuarioExistente = usuarioService.buscarPorUsuario(usuario)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        // Actualizar solo si el campo no está vacío o nulo
-        if (usuarioDTO.getNombre() != null && !usuarioDTO.getNombre().isEmpty()) {
-            usuarioExistente.setNombre(usuarioDTO.getNombre());
-        }
-        if (usuarioDTO.getApellidos() != null && !usuarioDTO.getApellidos().isEmpty()) {
-            usuarioExistente.setApellidos(usuarioDTO.getApellidos());
-        }
-
-        // Guardar los cambios en el repositorio
-        Usuario usuarioActualizado = usuarioService.actualizarUsuario(usuarioExistente);
+        Usuario usuarioActualizado = usuarioService.actualizarUsuario(usuario, usuarioDTO);
         UsuarioDTO respuestaDTO = UsuarioDTO.fromEntity(usuarioActualizado);
-
         return new ResponseEntity<>(respuestaDTO, HttpStatus.OK);
     }
 
@@ -85,16 +65,7 @@ public class UsuarioController {
     // Agregar fondos
     @PatchMapping("/fondos/{usuario}")
     public ResponseEntity<String> agregarFondos(@PathVariable String usuario, @RequestParam BigDecimal cantidad) {
-        Optional<Usuario> usuarioOpt = usuarioService.buscarPorUsuario(usuario);
-
-        if (usuarioOpt.isEmpty()) {
-            return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
-        }
-
-        Usuario u = usuarioOpt.get();
-        u.setCartera(u.getCartera().add(cantidad));
-        usuarioService.actualizarUsuario(u);
-
+        usuarioService.actualizarFondos(usuario, cantidad);
         return new ResponseEntity<>("Fondos agregados exitosamente", HttpStatus.OK);
     }
 

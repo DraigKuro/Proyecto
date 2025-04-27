@@ -1,17 +1,20 @@
 package com.tutienda.libros.api.services.impl;
 
+import com.tutienda.libros.api.dto.UsuarioDTO;
 import com.tutienda.libros.api.models.Usuario;
 import com.tutienda.libros.api.repositories.UsuarioRepository;
 import com.tutienda.libros.api.services.UsuarioService;
-import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+
 import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
+import java.math.BigDecimal;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -39,35 +42,40 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario usuario) {
-        if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent()) {
+    public Usuario registrarUsuario(UsuarioDTO usuarioDTO) {
+        if (usuarioRepository.findByUsuario(usuarioDTO.getUsuario()).isPresent()) {
             throw new RuntimeException("Nombre de usuario ya existe");
         }
-        
-        usuario.setCartera(BigDecimal.ZERO);
+
         String semilla = generarSemilla();
-        String combinado = usuario.getPass() + semilla;
+        String combinado = usuarioDTO.getPass() + semilla;
         String passFinal = passwordEncoder.encode(combinado);
 
+        Usuario usuario = usuarioDTO.toEntity(passFinal);  // Creamos el Usuario ya con el pass final
         usuario.setSemilla(semilla);
-        usuario.setPass(passFinal);
         usuario.setFechaRegistro(new Date());
+        usuario.setCartera(BigDecimal.ZERO); // si quieres también puedes permitir pasar cartera opcionalmente en el DTO
 
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public Usuario actualizarUsuario(Usuario usuario) {
-        Optional<Usuario> existente = usuarioRepository.findByUsuario(usuario.getUsuario());
-        if (existente.isEmpty()) {
-            throw new RuntimeException("Usuario no encontrado");
+    public Usuario actualizarUsuario(String nombreUsuario, UsuarioDTO usuarioDTO) {
+        Usuario existente = usuarioRepository.findByUsuario(nombreUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Solo actualizamos si el DTO tiene valores no nulos y no vacíos
+        if (usuarioDTO.getNombre() != null && !usuarioDTO.getNombre().isEmpty()) {
+            existente.setNombre(usuarioDTO.getNombre());
+        }
+        if (usuarioDTO.getApellidos() != null && !usuarioDTO.getApellidos().isEmpty()) {
+            existente.setApellidos(usuarioDTO.getApellidos());
+        }
+        if (usuarioDTO.getCartera() != null) {
+            existente.setCartera(usuarioDTO.getCartera());
         }
 
-        Usuario actualizado = existente.get();
-        actualizado.setNombre(usuario.getNombre());
-        actualizado.setApellidos(usuario.getApellidos());
-        actualizado.setCartera(usuario.getCartera());
-        return usuarioRepository.save(actualizado);
+        return usuarioRepository.save(existente);
     }
 
     @Override
@@ -92,6 +100,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Guardar la nueva contraseña
         usuarioRepository.save(usuarioExistente);
         return true; // Contraseña actualizada exitosamente
+    }
+
+    @Override
+    public Usuario actualizarFondos(String nombreUsuario, BigDecimal cantidad) {
+        Usuario existente = usuarioRepository.findByUsuario(nombreUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        existente.setCartera(existente.getCartera().add(cantidad));
+
+        return usuarioRepository.save(existente);
     }
 
     @Override

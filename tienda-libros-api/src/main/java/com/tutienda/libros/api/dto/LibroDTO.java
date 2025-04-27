@@ -1,8 +1,14 @@
 package com.tutienda.libros.api.dto;
 
+import com.tutienda.libros.api.models.Autor;
+import com.tutienda.libros.api.models.Editorial;
+import com.tutienda.libros.api.models.Genero;
+import com.tutienda.libros.api.models.Idioma;
+import com.tutienda.libros.api.models.Saga;
 import org.springframework.web.multipart.MultipartFile;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class LibroDTO {
 
@@ -16,6 +22,13 @@ public class LibroDTO {
     private String sinopsis;
     private Integer nVotos;
     private Short valoracion;
+
+    // Relaciones básicas necesarias (según tu modelo original)
+    private List<Autor> autores;
+    private Genero genero;
+    private Idioma idioma;
+    private Saga saga;
+    private List<Editorial> editoriales;
 
     // Campos para archivos (transient - no se persisten)
     private transient MultipartFile archivoPortada;
@@ -104,6 +117,46 @@ public class LibroDTO {
 
     public void setValoracion(Short valoracion) {
         this.valoracion = valoracion;
+    }
+
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGeneroId(Genero generoId) {
+        this.genero = generoId;
+    }
+
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(Idioma idiomaId) {
+        this.idioma = idiomaId;
+    }
+
+    public Saga getSaga() {
+        return saga;
+    }
+
+    public void setSaga(Saga saga) {
+        this.saga = saga;
+    }
+    
+    public List<Editorial> getEditoriales() {
+        return editoriales;
+    }
+
+    public void setEditoriales(List<Editorial> editoriales) {
+        this.editoriales = editoriales;
     }
 
     public MultipartFile getArchivoPortada() {
