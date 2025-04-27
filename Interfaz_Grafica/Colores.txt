@@ -1,0 +1,5 @@
+#25073b - morado oscuro
+#3d0566 - morado medio
+#650aa9 - morado claro
+#ffffff - blanco
+#000000 - nergo
