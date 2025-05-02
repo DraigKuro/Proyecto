@@ -1,4 +1,4 @@
-package com.tutienda.libros.api.services;
+package com.tutienda.libros.api.services.impl;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
