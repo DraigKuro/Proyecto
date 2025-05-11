@@ -1,8 +1,8 @@
 package com.tutienda.libros.api.dto;
 
 public class ActualizarContraseñaDTO {
-    private String contraseñaAntigua;  // Contraseña actual del usuario
-    private String contraseñaNueva;    // Nueva contraseña
+    private String contraseñaAntigua;
+    private String contraseñaNueva;
 
     // Constructor vacío
     public ActualizarContraseñaDTO() {}

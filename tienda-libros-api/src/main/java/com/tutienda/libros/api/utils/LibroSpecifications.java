@@ -21,9 +21,9 @@ public class LibroSpecifications {
             String nombreIdioma
     ) {
         return (root, query, criteriaBuilder) -> {
-            query.distinct(true); // para no duplicar libros con varios autores
+            query.distinct(true);
 
-            Predicate predicate = criteriaBuilder.conjunction(); // empieza con un "true" que vas combinando
+            Predicate predicate = criteriaBuilder.conjunction();
 
             if (nombreLibro != null && !nombreLibro.isBlank()) {
                 predicate = criteriaBuilder.and(predicate,

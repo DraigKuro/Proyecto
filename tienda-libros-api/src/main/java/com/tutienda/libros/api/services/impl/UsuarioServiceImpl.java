@@ -51,10 +51,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         String combinado = usuarioDTO.getPass() + semilla;
         String passFinal = passwordEncoder.encode(combinado);
 
-        Usuario usuario = usuarioDTO.toEntity(passFinal);  // Creamos el Usuario ya con el pass final
+        Usuario usuario = usuarioDTO.toEntity(passFinal);
         usuario.setSemilla(semilla);
         usuario.setFechaRegistro(new Date());
-        usuario.setCartera(BigDecimal.ZERO); // si quieres también puedes permitir pasar cartera opcionalmente en el DTO
+        usuario.setCartera(BigDecimal.ZERO);
 
         return usuarioRepository.save(usuario);
     }
@@ -64,7 +64,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario existente = usuarioRepository.findByUsuario(nombreUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        // Solo actualizamos si el DTO tiene valores no nulos y no vacíos
         if (usuarioDTO.getNombre() != null && !usuarioDTO.getNombre().isEmpty()) {
             existente.setNombre(usuarioDTO.getNombre());
         }
@@ -88,18 +87,18 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuarioExistente = usuarioOpt.get();
         String combinado = contraseñaAntigua + usuarioExistente.getSemilla();
 
-        // Verificar si la contraseña antigua es correcta
+
         if (!passwordEncoder.matches(combinado, usuarioExistente.getPass())) {
-            return false; // Contraseña antigua incorrecta
+            return false;
         }
 
-        // Hashear la nueva contraseña
+
         String nuevaContraseñaHasheada = passwordEncoder.encode(contraseñaNueva + usuarioExistente.getSemilla());
         usuarioExistente.setPass(nuevaContraseñaHasheada);
 
-        // Guardar la nueva contraseña
+
         usuarioRepository.save(usuarioExistente);
-        return true; // Contraseña actualizada exitosamente
+        return true;
     }
 
     @Override

@@ -30,16 +30,15 @@ import java.util.Optional;
 public class LibroServiceImpl implements LibroService {
 
     @Autowired
-    private final LibroRepository libroRepository;
-    private final SagaRepository sagaRepository;
+    private LibroRepository libroRepository;
+    private SagaRepository sagaRepository;
+    private LibroMapper libroMapper;
+    private FileStorageUtil fileStorageUtil;
 
-    private final LibroMapper libroMapper;
-    private final FileStorageUtil fileStorageUtil;
-
-    @Value("${app.uploads.portadas-dir}")
+    @Value("${app.uploads.portadas}")
     private String portadasDir;
 
-    @Value("${app.uploads.libros-dir}")
+    @Value("${app.uploads.libros}")
     private String librosDir;
 
     public LibroServiceImpl(LibroRepository libroRepository,
@@ -54,7 +53,6 @@ public class LibroServiceImpl implements LibroService {
 
     @Override
     public Libro crearLibro(Libro libro) {
-        // Validación simple (puedes añadir más)
         if (libroRepository.existsById(libro.getIdLibro())) {
             throw new RuntimeException("El libro ya existe");
         }
@@ -86,12 +84,10 @@ public class LibroServiceImpl implements LibroService {
             }
         }
 
-        // 4. Manejar autores a través de LibroAutor
         if (libroDTO.getAutores() != null && !libroDTO.getAutores().isEmpty()) {
             if (libro.getLibroAutorCollection() == null) {
                 libro.setLibroAutorCollection(new ArrayList<>());
             }
-            // Iterar sobre los autores del DTO
             for (Autor autor : libroDTO.getAutores()) {
                 LibroAutor libroAutor = new LibroAutor();
                 libroAutor.setLibro(libro);
