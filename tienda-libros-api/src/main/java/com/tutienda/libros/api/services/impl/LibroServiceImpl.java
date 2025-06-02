@@ -13,15 +13,12 @@ import com.tutienda.libros.api.dto.LibroDTO;
 
 import com.tutienda.libros.api.utils.LibroMapper;
 import com.tutienda.libros.api.utils.FileStorageUtil;
-import com.tutienda.libros.api.utils.LibroSpecifications;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -106,30 +103,8 @@ public class LibroServiceImpl implements LibroService {
     }
 
     @Override
-    public List<Libro> buscarLibrosConFiltros(
-            String nombreLibro,
-            String nombreAutor,
-            String nombreGenero,
-            String nombreSaga,
-            LocalDate fechaPublicacion,
-            Double valoracionMin,
-            Double valoracionMax,
-            BigDecimal precioMin,
-            BigDecimal precioMax,
-            String nombreIdioma
-    ) {
-        return libroRepository.findAll(LibroSpecifications.buscarLibros(
-                nombreLibro,
-                nombreAutor,
-                nombreGenero,
-                nombreSaga,
-                fechaPublicacion,
-                valoracionMin,
-                valoracionMax,
-                precioMin,
-                precioMax,
-                nombreIdioma
-        ));
+    public List<Libro> obtenerTodosLosLibros() {
+        return libroRepository.findAll();
     }
 
     @Override

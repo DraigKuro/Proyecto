@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -21,6 +19,13 @@ public class LibroController {
 
     public LibroController(LibroService libroService) {
         this.libroService = libroService;
+    }
+
+    // Obtener todos los libros(GET)
+    @GetMapping
+    public ResponseEntity<List<Libro>> obtenerTodosLibros() {
+        List<Libro> libros = libroService.obtenerTodosLosLibros();
+        return ResponseEntity.ok(libros);
     }
 
     // Crear libro con archivos (POST)
@@ -34,26 +39,7 @@ public class LibroController {
         }
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<List<Libro>> buscarPorFiltros(
-            @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String autor,
-            @RequestParam(required = false) String genero,
-            @RequestParam(required = false) String saga,
-            @RequestParam(required = false) LocalDate fechaPublicacion,
-            @RequestParam(required = false) Double valoracionMin,
-            @RequestParam(required = false) Double valoracionMax,
-            @RequestParam(required = false) BigDecimal precioMin,
-            @RequestParam(required = false) BigDecimal precioMax,
-            @RequestParam(required = false) String idioma) {
-
-        List<Libro> libros = libroService.buscarLibrosConFiltros(
-                titulo, autor, genero, saga, fechaPublicacion,
-                valoracionMin, valoracionMax, precioMin, precioMax, idioma);
-
-        return ResponseEntity.ok(libros);
-    }
-
+    // Obtener un libro por su ID(GET)
     @GetMapping("/{idLibro}")
     public ResponseEntity<Libro> buscarPorId(@PathVariable String idLibro) {
         Libro libro = libroService.buscarPorId(idLibro);

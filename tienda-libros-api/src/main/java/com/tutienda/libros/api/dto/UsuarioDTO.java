@@ -1,25 +1,25 @@
 package com.tutienda.libros.api.dto;
 
-import com.tutienda.libros.api.models.Editorial;
 import com.tutienda.libros.api.models.Usuario;
 import java.math.BigDecimal;
 
 public class UsuarioDTO {
 
     private String usuario;
+    private String correo;
     private String pass;
     private String nombre;
     private String apellidos;
     private BigDecimal cartera;
-    private Editorial editorial;
 
     // Constructor vacío
     public UsuarioDTO() {
     }
 
     // Constructor con todos los parámetros
-    public UsuarioDTO(String usuario, String pass, String nombre, String apellidos, BigDecimal cartera) {
+    public UsuarioDTO(String usuario, String correo, String pass, String nombre, String apellidos, BigDecimal cartera) {
         this.usuario = usuario;
+        this.correo = correo;
         this.pass = pass;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -33,6 +33,14 @@ public class UsuarioDTO {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getPass() {
@@ -67,18 +75,11 @@ public class UsuarioDTO {
         this.cartera = cartera;
     }
 
-    public Editorial getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(Editorial editorial) {
-        this.editorial = editorial;
-    }
-
     // Método para transformar un DTO a entidad Usuario
     public static UsuarioDTO fromEntity(Usuario usuario) {
         return new UsuarioDTO(
                 usuario.getUsuario(),
+                usuario.getCorreo(),
                 null, // La contraseña no se debe incluir en el DTO de la respuesta
                 usuario.getNombre(),
                 usuario.getApellidos(),
@@ -89,10 +90,10 @@ public class UsuarioDTO {
     public Usuario toEntity(String semillaHashedPassword) {
         Usuario user = new Usuario();
         user.setUsuario(this.usuario);
+        user.setCorreo(this.correo);
         user.setPass(semillaHashedPassword);
         user.setNombre(this.nombre);
         user.setApellidos(this.apellidos);
-        user.setEditorial(this.editorial);
         return user;
     }
 }

@@ -1,0 +1,24 @@
+Presentar idea
+	motivos de la idea
+	objetivos
+	análisis de mercado 
+		a quien va dirigida
+		ventajas sobre la competencia
+		debilidades sobre la misma 
+	Hablar de la empresa
+Hablar de la infraestructura 
+	donde se va a alojar el servidor, la API, odoo, etc
+	por que se ha escogido eso
+Presentar apliacion en general
+	mostrar la ui con capturas y hablar un poco de ella 
+	hablar de las diferencias que hay entre ambas aplicaciones y por que 
+	hablar mas en profundidad de que ofrece
+		hablar del ocr y por que se ha escogido 
+		hablar de que se usa para los pagos y por que 
+	hablar de la DB y por se ha escogido 
+	hablar de la API
+	hablar de la seguridad de la app
+		app por roles 
+		encriptación de datos sensibles
+hablar de las pruebas
+

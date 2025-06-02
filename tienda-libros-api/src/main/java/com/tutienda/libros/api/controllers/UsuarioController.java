@@ -50,6 +50,15 @@ public class UsuarioController {
         return new ResponseEntity<>(respuestaDTO, HttpStatus.OK);
     }
 
+    // Actualizar solo el correo
+    @PutMapping("/actualizar/correo/{usuario}")
+    public ResponseEntity<String> actualizarCorreo(
+            @PathVariable String usuario,
+            @RequestParam String nuevoCorreo) {
+        usuarioService.actualizarCorreo(usuario, nuevoCorreo);
+        return new ResponseEntity<>("Correo actualizado exitosamente", HttpStatus.OK);
+    }
+
     // Actualizar solo la contraseña
     @PutMapping("/actualizar/contraseña/{usuario}")
     public ResponseEntity<String> actualizarContraseña(@PathVariable String usuario, @RequestBody ActualizarContraseñaDTO actualizarContraseñaDTO) {

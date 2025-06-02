@@ -1,7 +1,6 @@
 package com.tutienda.libros.api.models;
 
 import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,14 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -35,7 +31,8 @@ import java.util.Date;
     @NamedQuery(name = "Usuario.findBySemilla", query = "SELECT u FROM Usuario u WHERE u.semilla = :semilla"),
     @NamedQuery(name = "Usuario.findByCartera", query = "SELECT u FROM Usuario u WHERE u.cartera = :cartera"),
     @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro"),
-    @NamedQuery(name = "Usuario.findByUltimoRegistro", query = "SELECT u FROM Usuario u WHERE u.ultimoRegistro = :ultimoRegistro")})
+    @NamedQuery(name = "Usuario.findByUltimoRegistro", query = "SELECT u FROM Usuario u WHERE u.ultimoRegistro = :ultimoRegistro"),
+    @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,12 +67,8 @@ public class Usuario implements Serializable {
     @Column(name = "ultimo_registro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ultimoRegistro;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idFkUsuario")
-    private Editorial editorial;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idFkUsuario")
-    private Biblioteca biblioteca;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Deseado> deseadoCollection;
+    @Column(name = "correo")
+    private String correo;
 
     public Usuario() {
     }
@@ -167,28 +160,12 @@ public class Usuario implements Serializable {
         this.ultimoRegistro = ultimoRegistro;
     }
 
-    public Editorial getEditorial() {
-        return editorial;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEditorial(Editorial editorial) {
-        this.editorial = editorial;
-    }
-
-    public Biblioteca getBiblioteca() {
-        return biblioteca;
-    }
-
-    public void setBiblioteca(Biblioteca biblioteca) {
-        this.biblioteca = biblioteca;
-    }
-
-    public Collection<Deseado> getDeseadoCollection() {
-        return deseadoCollection;
-    }
-
-    public void setDeseadoCollection(Collection<Deseado> deseadoCollection) {
-        this.deseadoCollection = deseadoCollection;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     @Override

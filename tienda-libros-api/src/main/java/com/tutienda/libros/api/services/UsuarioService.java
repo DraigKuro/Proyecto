@@ -17,6 +17,9 @@ public interface UsuarioService {
     // Actualizar usuario existente
     Usuario actualizarUsuario(String nombreUsuario, UsuarioDTO usuarioDTO);
 
+    // Actualizar solamente el correo de un usuario
+    Usuario actualizarCorreo(String nombreUsuario, String nuevoCorreo);
+
     // Actualizar fondos
     Usuario actualizarFondos(String nombreUsuario, BigDecimal cantidad);
 

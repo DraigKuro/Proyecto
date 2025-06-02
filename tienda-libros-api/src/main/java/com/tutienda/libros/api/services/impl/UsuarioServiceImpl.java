@@ -3,6 +3,7 @@ package com.tutienda.libros.api.services.impl;
 import com.tutienda.libros.api.dto.UsuarioDTO;
 import com.tutienda.libros.api.models.Usuario;
 import com.tutienda.libros.api.repositories.UsuarioRepository;
+import com.tutienda.libros.api.services.BibliotecaService;
 import com.tutienda.libros.api.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private BibliotecaService bibliotecaService;
 
     @Override
     public Optional<Usuario> iniciarSesion(String usuario, String pass) {
@@ -55,6 +59,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setSemilla(semilla);
         usuario.setFechaRegistro(new Date());
         usuario.setCartera(BigDecimal.ZERO);
+        
+        bibliotecaService.crearBiblioteca(usuarioDTO);
 
         return usuarioRepository.save(usuario);
     }
@@ -78,6 +84,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Usuario actualizarCorreo(String nombreUsuario, String nuevoCorreo) {
+        Usuario existente = usuarioRepository.findByUsuario(nombreUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Aquí podrías añadir validación de formato o unicidad del correo si lo deseas
+        existente.setCorreo(nuevoCorreo);
+        return usuarioRepository.save(existente);
+    }
+
+    @Override
     public boolean actualizarContraseña(String usuario, String contraseñaAntigua, String contraseñaNueva) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByUsuario(usuario);
         if (usuarioOpt.isEmpty()) {
@@ -87,15 +103,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuarioExistente = usuarioOpt.get();
         String combinado = contraseñaAntigua + usuarioExistente.getSemilla();
 
-
         if (!passwordEncoder.matches(combinado, usuarioExistente.getPass())) {
             return false;
         }
 
-
         String nuevaContraseñaHasheada = passwordEncoder.encode(contraseñaNueva + usuarioExistente.getSemilla());
         usuarioExistente.setPass(nuevaContraseñaHasheada);
-
 
         usuarioRepository.save(usuarioExistente);
         return true;

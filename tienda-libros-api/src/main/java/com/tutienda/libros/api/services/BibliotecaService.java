@@ -12,10 +12,6 @@ public interface BibliotecaService {
 
     Biblioteca obtenerBiblioteca(UsuarioDTO usuario);
 
-    Biblioteca actualizarBiblioteca(UsuarioDTO usuario, String bibliotecaId);
-
-    Biblioteca eliminarBiblioteca(UsuarioDTO usuario, String bibliotecaId);
-
     Biblioteca agregarLibrosABiblioteca(UsuarioDTO usuario, List<Libro> libro);
 
     Biblioteca eliminarLibrosDeBiblioteca(UsuarioDTO usuario, List<Libro> libro);
