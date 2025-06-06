@@ -1,0 +1,37 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_inicio">
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.myapplication.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_inicio"
+        android:name="com.example.myapplication.ui.inicio.InicioFragment"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/nav_tienda"
+        android:name="com.example.myapplication.ui.tienda.TiendaFragment"
+        android:label="Tienda"
+        tools:layout="@layout/fragment_tienda" />
+
+    <fragment
+        android:id="@+id/nav_biblioteca"
+        android:name="com.example.myapplication.ui.biblioteca.BibliotecaFragment"
+        android:label="Mi Biblioteca"
+        tools:layout="@layout/fragment_biblioteca" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.example.myapplication.ui.perfil.PerfilFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+</navigation>
